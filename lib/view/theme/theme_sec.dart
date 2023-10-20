@@ -1,12 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:stok_takibi_masaustu/view/constant/constant_color.dart';
-import 'package:stok_takibi_masaustu/view/constant/constant_double.dart';
-import 'package:stok_takibi_masaustu/view/constant/constant_text_style.dart';
+import 'package:stok_takibi_masaustu/view/constant/color.dart';
+import 'package:stok_takibi_masaustu/view/constant/double.dart';
+import 'package:stok_takibi_masaustu/view/constant/text_style.dart';
 
 final themeSec = ThemeData(
   appBarTheme: appBarTheme(),
   elevatedButtonTheme: elevatedButtonThemeData(),
   inputDecorationTheme: inputDecorationTheme(),
+  scrollbarTheme: ScrollbarThemeData(
+    thumbColor: MaterialStateProperty.all<Color>(scrollbarThumbColor),
+  ),
+  dataTableTheme: DataTableThemeData(
+    headingRowColor: MaterialStateProperty.all<Color>(secThemeDataTableHeadingRowColor),
+    dataRowColor: MaterialStateProperty.resolveWith<Color?>(
+      (Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered)) {
+          return secThemeScaffoldBackgroundColor;
+        } else if (states.contains(MaterialState.pressed)) {
+          return secThemeDataTableHeadingRowColor;
+        }
+        return null;
+      },
+    ),
+    // headingTextStyle: MaterialStateProperty.all<TextStyle>(firstThemeDataTableHeadingTextStyle),
+    // dataTextStyle: MaterialStateProperty.all<TextStyle>(firstThemeDataTableDataTextStyle),
+    // dividerThickness: firstThemeDataTableDividerThickness,
+  ),
   scaffoldBackgroundColor: secThemeScaffoldBackgroundColor,
 );
 
