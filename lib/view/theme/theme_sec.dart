@@ -7,25 +7,8 @@ final themeSec = ThemeData(
   appBarTheme: appBarTheme(),
   elevatedButtonTheme: elevatedButtonThemeData(),
   inputDecorationTheme: inputDecorationTheme(),
-  scrollbarTheme: ScrollbarThemeData(
-    thumbColor: MaterialStateProperty.all<Color>(scrollbarThumbColor),
-  ),
-  dataTableTheme: DataTableThemeData(
-    headingRowColor: MaterialStateProperty.all<Color>(secThemeDataTableHeadingRowColor),
-    dataRowColor: MaterialStateProperty.resolveWith<Color?>(
-      (Set<MaterialState> states) {
-        if (states.contains(MaterialState.hovered)) {
-          return secThemeScaffoldBackgroundColor;
-        } else if (states.contains(MaterialState.pressed)) {
-          return secThemeDataTableHeadingRowColor;
-        }
-        return null;
-      },
-    ),
-    // headingTextStyle: MaterialStateProperty.all<TextStyle>(firstThemeDataTableHeadingTextStyle),
-    // dataTextStyle: MaterialStateProperty.all<TextStyle>(firstThemeDataTableDataTextStyle),
-    // dividerThickness: firstThemeDataTableDividerThickness,
-  ),
+  dataTableTheme: dataTableThemeData(),
+  scrollbarTheme: scrollbarThemeData(),
   scaffoldBackgroundColor: secThemeScaffoldBackgroundColor,
 );
 
@@ -82,5 +65,29 @@ InputDecorationTheme inputDecorationTheme() {
       width: constraintWidth,
       height: constraintHeight,
     ),
+  );
+}
+
+DataTableThemeData dataTableThemeData() {
+  return DataTableThemeData(
+    headingRowColor: MaterialStateProperty.all<Color>(secThemeDataTableHeadingRowColor),
+    dataRowColor: MaterialStateProperty.resolveWith<Color?>(
+      (Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered)) {
+          return secThemeScaffoldBackgroundColor;
+        } else if (states.contains(MaterialState.pressed)) {
+          return secThemeDataTableHeadingRowColor;
+        }
+        return null;
+      },
+    ),
+    headingTextStyle: tableHeadingTextStyle,
+    dataTextStyle: tableDataTextStyle,
+  );
+}
+
+ScrollbarThemeData scrollbarThemeData() {
+  return ScrollbarThemeData(
+    thumbColor: MaterialStateProperty.all<Color>(scrollbarThumbColor),
   );
 }

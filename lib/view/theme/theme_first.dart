@@ -7,25 +7,8 @@ final themeFirst = ThemeData(
   appBarTheme: appBarTheme(),
   elevatedButtonTheme: elevatedButtonThemeData(),
   inputDecorationTheme: inputDecorationTheme(),
-  dataTableTheme: DataTableThemeData(
-    headingRowColor: MaterialStateProperty.all<Color>(firstThemeDataTableHeadingRowColor),
-    dataRowColor: MaterialStateProperty.resolveWith<Color?>(
-      (Set<MaterialState> states) {
-        if (states.contains(MaterialState.hovered)) {
-          return firstThemeScaffoldBackgroundColor;
-        } else if (states.contains(MaterialState.pressed)) {
-          return firstThemeDataTableHeadingRowColor;
-        }
-        return null;
-      },
-    ),
-    // headingTextStyle: MaterialStateProperty.all<TextStyle>(firstThemeDataTableHeadingTextStyle),
-    // dataTextStyle: MaterialStateProperty.all<TextStyle>(firstThemeDataTableDataTextStyle),
-    // dividerThickness: firstThemeDataTableDividerThickness,
-  ),
-  scrollbarTheme: ScrollbarThemeData(
-    thumbColor: MaterialStateProperty.all<Color>(scrollbarThumbColor),
-  ),
+  dataTableTheme: dataTableThemeData(),
+  scrollbarTheme: scrollbarThemeData(),
   scaffoldBackgroundColor: firstThemeScaffoldBackgroundColor,
 );
 
@@ -82,5 +65,29 @@ InputDecorationTheme inputDecorationTheme() {
       width: constraintWidth,
       height: constraintHeight,
     ),
+  );
+}
+
+DataTableThemeData dataTableThemeData() {
+  return DataTableThemeData(
+    headingRowColor: MaterialStateProperty.all<Color>(firstThemeDataTableHeadingRowColor),
+    dataRowColor: MaterialStateProperty.resolveWith<Color?>(
+      (Set<MaterialState> states) {
+        if (states.contains(MaterialState.hovered)) {
+          return firstThemeScaffoldBackgroundColor;
+        } else if (states.contains(MaterialState.pressed)) {
+          return firstThemeDataTableHeadingRowColor;
+        }
+        return null;
+      },
+    ),
+    headingTextStyle: tableHeadingTextStyle,
+    dataTextStyle: tableDataTextStyle,
+  );
+}
+
+ScrollbarThemeData scrollbarThemeData() {
+  return ScrollbarThemeData(
+    thumbColor: MaterialStateProperty.all<Color>(scrollbarThumbColor),
   );
 }

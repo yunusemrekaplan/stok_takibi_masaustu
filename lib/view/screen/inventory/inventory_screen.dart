@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stok_takibi_masaustu/view/constant/padding.dart';
+import 'package:stok_takibi_masaustu/view/constant/string.dart';
 import 'package:stok_takibi_masaustu/view/get_controller/theme_controller.dart';
 import 'package:stok_takibi_masaustu/view/widget/my_app_bar.dart';
 
@@ -9,6 +10,11 @@ class InventoryScreen extends StatelessWidget {
 
   final _themeController = Get.find<ThemeController>();
   final BorderRadius borderRadius = BorderRadius.circular(25);
+
+  final double borderSideWith = 0.7;
+  final Color borderSideColor = Colors.white;
+  final Axis dataTableScrollDirection = Axis.vertical;
+  final bool showCheckboxColumn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +53,13 @@ class InventoryScreen extends StatelessWidget {
 
   Obx buildDataTableContainer() {
     return Obx(
-          () => Container(
+      () => Container(
         decoration: BoxDecoration(
           color: _themeController.dataTableContainerColor.value,
           borderRadius: borderRadius,
         ),
         child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
+          scrollDirection: dataTableScrollDirection,
           child: ClipRRect(
             borderRadius: borderRadius,
             child: buildDataTable(),
@@ -65,25 +71,9 @@ class InventoryScreen extends StatelessWidget {
 
   DataTable buildDataTable() {
     return DataTable(
-      showCheckboxColumn: false,
-      border: const TableBorder(
-        horizontalInside: BorderSide(
-          width: 0.5,
-          color: Colors.white,
-        ),
-        verticalInside: BorderSide(
-          width: 0.6,
-          color: Colors.white,
-        ),
-        borderRadius: BorderRadius.all(Radius.circular(25)),
-      ),
-      columns: const [
-        DataColumn(label: Text('Barcode', style: TextStyle(color: Colors.white, fontSize: 22))),
-        DataColumn(label: Text('Name', style: TextStyle(color: Colors.white, fontSize: 22))),
-        DataColumn(label: Text('Description', style: TextStyle(color: Colors.white, fontSize: 22))),
-        DataColumn(label: Text('Price', style: TextStyle(color: Colors.white, fontSize: 22))),
-        DataColumn(label: Text('Quantity', style: TextStyle(color: Colors.white, fontSize: 22))),
-      ],
+      showCheckboxColumn: showCheckboxColumn,
+      border: buildTableBorder(),
+      columns: buildColumns(),
       rows: [
         DataRow(
           cells: const [
@@ -201,6 +191,30 @@ class InventoryScreen extends StatelessWidget {
           DataCell(Text('5')),
         ]),
       ],
+    );
+  }
+
+  List<DataColumn> buildColumns() {
+    return const [
+      DataColumn(label: Text(barcode)),
+      DataColumn(label: Text(name)),
+      DataColumn(label: Text(description)),
+      DataColumn(label: Text(price), numeric: true),
+      DataColumn(label: Text(quantity), numeric: true),
+    ];
+  }
+
+  TableBorder buildTableBorder() {
+    return TableBorder(
+      horizontalInside: BorderSide(
+        width: borderSideWith,
+        color: borderSideColor,
+      ),
+      verticalInside: BorderSide(
+        width: borderSideWith,
+        color: borderSideColor,
+      ),
+      borderRadius: borderRadius,
     );
   }
 }

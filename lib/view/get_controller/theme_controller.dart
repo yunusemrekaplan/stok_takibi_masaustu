@@ -17,7 +17,6 @@ class ThemeController extends GetxController {
       dataTableContainerColor.value = secThemeContainerColor;
       Get.changeTheme(themeSec);
     }
-    print(dataTableContainerColor);
     update();
   }
 }

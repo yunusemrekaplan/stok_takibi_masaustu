@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'constant_color.dart';
-import 'constant_double.dart';
+import 'color.dart';
+import 'double.dart';
 
 const TextStyle appBarTitleTextStyle = TextStyle(color: textColor, fontSize: appBarTitleSize);
 const TextStyle buttonTextStyle = TextStyle(fontSize: buttonTextSize);
 const TextStyle hintStyle = TextStyle(color: textColor, fontSize: hintTextSize);
-const TextStyle loginTextFormFieldStyle = TextStyle(color: textColor, fontSize: 20);
+const TextStyle tableHeadingTextStyle = TextStyle(color: textColor, fontSize: tableHeadingFontSize);
+const TextStyle tableDataTextStyle = TextStyle(color: textColor, fontSize: tableDataFontSize);
