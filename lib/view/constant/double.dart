@@ -1,5 +1,5 @@
 const double appBarTitleSize = 30;
-const double buttonTextSize = 26;
+const double buttonTextSize = 22;
 const double hintTextSize = 20;
 const double focusedWidth = 3;
 const double defaultWidth = 1.5;
