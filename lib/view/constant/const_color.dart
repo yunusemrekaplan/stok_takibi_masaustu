@@ -7,6 +7,12 @@ const Color errorColor = Colors.red;
 const Color iconColor = Colors.white;
 const Color transparent = Colors.transparent;
 const Color scrollbarThumbColor = Colors.white38;
+const Color cursorColor = Colors.white;
+const Color searchBoxColor = Colors.white30;
+
+
+const Color borderSideColor = Colors.white;
+
 
 const Color firstThemeAppBarColor = Color(0xFF1F3F65);
 //const Color firstThemeButtonColor = Color(0xFF043762);

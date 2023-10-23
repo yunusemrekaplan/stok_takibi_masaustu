@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stok_takibi_masaustu/view/constant/icon.dart';
+import 'package:stok_takibi_masaustu/view/constant/const_icon.dart';
 import 'package:stok_takibi_masaustu/view/get_controller/theme_controller.dart';
 
 final _themeController = Get.find<ThemeController>();

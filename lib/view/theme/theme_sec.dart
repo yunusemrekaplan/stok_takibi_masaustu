@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stok_takibi_masaustu/view/constant/color.dart';
-import 'package:stok_takibi_masaustu/view/constant/text_style.dart';
+import 'package:stok_takibi_masaustu/view/constant/const_color.dart';
+import 'package:stok_takibi_masaustu/view/constant/const_text_style.dart';
 
 final themeSec = ThemeData(
   appBarTheme: appBarTheme(),

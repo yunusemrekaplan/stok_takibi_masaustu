@@ -1,34 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stok_takibi_masaustu/model/data_model/product.dart';
 
 class InventoryController extends GetxController {
-  final List<Product> products = [];
+  RxList<Product>? products = <Product>[].obs;
+  Rx<Color> searchIconColor = Colors.white.withOpacity(1).obs;
+  FocusNode searchFocusNode = FocusNode();
 
-  void addProduct(Product product) {
-    products.add(product);
-    update();
-  }
-
-  void removeProduct(Product product) {
-    products.remove(product);
-    update();
-  }
-
-  void updateProduct(Product product) {
-    products[products.indexWhere((element) => element.id == product.id)] = product;
-    update();
-  }
-
-  void clearProducts() {
-    products.clear();
-    update();
-  }
-
-  void sortProducts(int index) {
-    if (index == 0) {
-      products.sort((a, b) => a.barcode!.compareTo(b.barcode!));
-    }
-    products.sort((a, b) => a.name.compareTo(b.name));
-    update();
+  InventoryController() {
+    searchFocusNode.addListener(() {
+      if (searchFocusNode.hasFocus) {
+        searchIconColor.value = Colors.white.withOpacity(0);
+      } else {
+        searchIconColor.value = Colors.white.withOpacity(1);
+      }
+    });
   }
 }
