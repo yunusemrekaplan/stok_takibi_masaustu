@@ -10,20 +10,25 @@ const String brandHintText = 'Marka Giriniz';
 const String modelHintText = 'Model Giriniz';
 const String priceHintText = 'Fiyat Giriniz';
 const String addProductButtonText = 'Ürün Ekle';
+const String validatorMessage = 'Lütfen bir değer giriniz.';
 
 const double paddingBoxHeight = 20.0;
 const double textBoxWidth = 100.0;
+const double textBoxHeight = 60.0;
 const double addProductButtonRowWidth = 430.0;
+const double addProductButtonTextSize = 24.0;
 
 const MainAxisAlignment formRowMainAxisAlignment = MainAxisAlignment.center;
 const MainAxisAlignment formMainAxisAlignment = MainAxisAlignment.center;
+const AutovalidateMode always = AutovalidateMode.always;
+const AutovalidateMode disabled = AutovalidateMode.disabled;
 
 const EdgeInsets addProductButtonPadding = EdgeInsets.only(
   left: addProductButtonPaddingLeft,
   right: addProductButtonPaddingRight,
 );
 const addProductButtonPaddingLeft = 110.0;
-const addProductButtonPaddingRight = 200.0;
+const addProductButtonPaddingRight = 180.0;
 
 const EdgeInsets contentPadding = EdgeInsets.only(
   left: contentPaddingLeft,
@@ -56,8 +61,8 @@ const BoxConstraints boxConstraints = BoxConstraints(
   maxHeight: boxConstraintsMaxHeight,
 );
 const double boxConstraintsMaxWidth = 300;
-const double boxConstraintsMinHeight = 30;
-const double boxConstraintsMaxHeight = 47;
+const double boxConstraintsMinHeight = 70;
+const double boxConstraintsMaxHeight = 70;
 
 BorderRadius borderRadius = BorderRadius.circular(borderRadiusDouble);
 const double borderRadiusDouble = 25.0;

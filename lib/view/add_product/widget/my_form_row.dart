@@ -18,6 +18,7 @@ class MyFormRow extends StatelessWidget {
       children: [
         SizedBox(
           width: textBoxWidth,
+          height: textBoxHeight,
           child: Text(
             text,
             style: formTextStyle,
@@ -33,10 +34,18 @@ class MyFormRow extends StatelessWidget {
       padding: textFormFieldPadding,
       child: TextFormField(
         controller: controller,
+        validator: validator,
         style: textFormFieldTextStyle,
         decoration: buildInputDecoration(hintText),
       ),
     );
+  }
+
+  String? validator(String? value) {
+    if (value!.isEmpty) {
+      return validatorMessage;
+    }
+    return null;
   }
 
   InputDecoration buildInputDecoration(String hintText) {

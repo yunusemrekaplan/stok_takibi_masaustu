@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stok_takibi_masaustu/view/get_controller/theme_controller.dart';
-import 'package:stok_takibi_masaustu/view/widget/my_app_bar.dart';
 
+import '/model/enum/extension/extension_my_route.dart';
+import '/model/enum/my_route.dart';
+import '/view/get_controller/theme_controller.dart';
+import '/view/widget/my_app_bar.dart';
 import 'add_product_controller.dart';
 import 'constant.dart';
 import 'widget/my_form_row.dart';
@@ -15,7 +17,11 @@ class AddProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildScaffold(context);
+    return GetBuilder(
+      init: _addProductController,
+      builder: (_) => buildScaffold(context),
+      id: MyRoute.addProductScreen.stringDefinition,
+    );
   }
 
   Scaffold buildScaffold(BuildContext context) {
@@ -43,46 +49,73 @@ class AddProductScreen extends StatelessWidget {
     );
   }
 
-  Column buildForm() {
-    return Column(
-      mainAxisAlignment: formMainAxisAlignment,
-      children: [
-        MyFormRow(
-          controller: _addProductController.barcodeController,
-          text: barcodeText,
-          hintText: barcodeHintText,
-        ),
-        const SizedBox(height: paddingBoxHeight),
-        MyFormRow(
-          controller: _addProductController.brandController,
-          text: brandText,
-          hintText: brandHintText,
-        ),
-        const SizedBox(height: paddingBoxHeight),
-        MyFormRow(
-          controller: _addProductController.modelController,
-          text: modelText,
-          hintText: modelHintText,
-        ),
-        const SizedBox(height: paddingBoxHeight),
-        MyFormRow(
-          controller: _addProductController.priceController,
-          text: priceText,
-          hintText: priceHintText,
-        ),
-        const SizedBox(height: paddingBoxHeight),
-        buildAddProductButton(),
-      ],
+  Form buildForm() {
+    return Form(
+      key: _addProductController.formKey,
+      autovalidateMode: isAutoValidateMode(),
+      child: Column(
+        mainAxisAlignment: formMainAxisAlignment,
+        children: [
+          MyFormRow(
+            controller: _addProductController.barcodeController,
+            text: barcodeText,
+            hintText: barcodeHintText,
+          ),
+          const SizedBox(height: paddingBoxHeight),
+          MyFormRow(
+            controller: _addProductController.brandController,
+            text: brandText,
+            hintText: brandHintText,
+          ),
+          const SizedBox(height: paddingBoxHeight),
+          MyFormRow(
+            controller: _addProductController.modelController,
+            text: modelText,
+            hintText: modelHintText,
+          ),
+          const SizedBox(height: paddingBoxHeight),
+          MyFormRow(
+            controller: _addProductController.priceController,
+            text: priceText,
+            hintText: priceHintText,
+          ),
+          const SizedBox(height: paddingBoxHeight),
+          buildAddProductButtonBox(),
+        ],
+      ),
     );
   }
 
-  SizedBox buildAddProductButton() {
+  SizedBox buildAddProductButtonBox() {
     return SizedBox(
       width: addProductButtonRowWidth,
       child: Padding(
         padding: addProductButtonPadding,
-        child: ElevatedButton(onPressed: () {}, child: const Text(addProductButtonText)),
+        child: buildAddProductButton(),
       ),
     );
   }
+
+  ElevatedButton buildAddProductButton() {
+    return ElevatedButton(
+      onPressed: onPressedAddProductButton,
+      child: const Text(addProductButtonText, style: TextStyle(fontSize: addProductButtonTextSize)),
+    );
+  }
+
+  void onPressedAddProductButton() {
+    changeValidateFailedState();
+
+    if (!_addProductController.isValidateFailed) {
+      // onAddProduct();
+    }
+  }
+
+  void changeValidateFailedState() {
+    _addProductController
+        .changeValidateFailedState(!_addProductController.formKey.currentState!.validate());
+  }
+
+  AutovalidateMode isAutoValidateMode() =>
+      _addProductController.isValidateFailed ? always : disabled;
 }
