@@ -30,7 +30,7 @@ class AddProductScreen extends StatelessWidget {
 
   Scaffold buildScaffold(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(addCategoryAppBarTitle),
+      appBar: myAppBar(addProductAppBarTitle),
       body: buildBody(context),
     );
   }
@@ -67,10 +67,21 @@ class AddProductScreen extends StatelessWidget {
           ),
           const SizedBox(height: paddingBoxHeight),
           MyFormRow(
+            controller: _addProductController.categoryController,
+            text: categoryText,
+            hintText: categoryHintText,
+            dropdownHintText: dropdownCategoryHintText,
+            isEnableDropDownButton: true,
+            index: 0,
+          ),
+          const SizedBox(height: paddingBoxHeight),
+          MyFormRow(
             controller: _addProductController.brandController,
             text: brandText,
             hintText: brandHintText,
+            dropdownHintText: dropdownBrandHintText,
             isEnableDropDownButton: true,
+            index: 1,
           ),
           const SizedBox(height: paddingBoxHeight),
           MyFormRow(
@@ -90,6 +101,9 @@ class AddProductScreen extends StatelessWidget {
             controller: _addProductController.currencyController,
             text: currencyText,
             hintText: currencyHintText,
+            dropdownHintText: dropdownCurrencyHintText,
+            isEnableDropDownButton: true,
+            index: 2,
           ),
           const SizedBox(height: paddingBoxHeight),
           buildAddProductButtonBox(),

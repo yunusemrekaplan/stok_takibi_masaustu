@@ -8,19 +8,29 @@ import '/model/enum/my_route.dart';
 class AddProductController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey();
   final TextEditingController barcodeController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
   final TextEditingController brandController = TextEditingController();
   final TextEditingController modelController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController currencyController = TextEditingController();
 
   RxList productList = [].obs;
+  List<String> categoryList = [
+    'Kulaklık',
+    'Şarj Aleti',
+    'Klavye',
+  ];
   List<String> brandList = [
     'Apple',
     'Samsung',
     'Huawei',
   ];
+  List<String> currencyList = [
+    'Try',
+    'Usd',
+    'Eur',
+  ];
 
-  String? dropdownValue;
   bool isValidateFailed = false;
 
   void changeValidateFailedState(bool state) {
@@ -28,9 +38,9 @@ class AddProductController extends GetxController {
     update([MyRoute.addProductScreen.stringDefinition]); // setState
   }
 
-  void onChangedDropDownButton(value) {
-    dropdownValue = value.toString();
-    brandController.text = dropdownValue!;
+  void onChangedDropDownButton(String value, TextEditingController controller) {
+    //dropdownValue = value.toString();
+    controller.text = value.toString();
     update([MyRoute.addProductScreen.stringDefinition]); // setState
   }
 

@@ -18,19 +18,42 @@ class MyFormRow extends StatelessWidget {
     required this.text,
     required this.hintText,
     this.isEnableDropDownButton = false,
+    this.dropdownHintText,
     this.isDouble = false,
-  });
+    this.index,
+  }) {
+    init();
+  }
+
+  void init() {
+    if (isEnableDropDownButton == true) {
+      if (index == 0) {
+        dropdownList = _addProductController.categoryList;
+      }
+      else if (index == 1) {
+        dropdownList = _addProductController.brandList;
+      }
+      else if (index == 2) {
+        dropdownList = _addProductController.currencyList;
+      }
+    }
+  }
 
   final _addProductController = Get.find<AddProductController>();
+  final List<TextInputFormatter> inputFormatters = [
+    FilteringTextInputFormatter.digitsOnly,
+  ];
+  final bool isEnableDropDownButton;
+  final bool isDouble;
 
   late TextEditingController controller;
   late String text;
   late String hintText;
-  final bool isEnableDropDownButton;
-  final bool isDouble;
-  final List<TextInputFormatter> inputFormatters = [
-    FilteringTextInputFormatter.digitsOnly,
-  ];
+  late String? dropdownHintText;
+  late String? dropdownValue;
+  late List<String> dropdownList;
+
+  int? index;
 
   @override
   Widget build(BuildContext context) {
@@ -73,22 +96,21 @@ class MyFormRow extends StatelessWidget {
 
   DropdownButton buildDropDownButton() {
     return DropdownButton(
-      value: _addProductController.dropdownValue,
       icon: dropDownIcon,
       iconSize: dropdownIconSize,
       isExpanded: dropdownIsExpanded,
       dropdownColor: dropdownColor,
-      hint: const Text(dropdownHintText, style: dropdownHintTextStyle),
+      hint: Text(dropdownHintText!, style: dropdownHintTextStyle),
       style: dropdownButtonTextStyle,
       padding: dropdownPadding,
       underline: Container(height: dropdownButtonUnderlineHeight, color: underLineColor),
       items: buildDropDownMenuItemList(),
-      onChanged: _addProductController.onChangedDropDownButton,
+      onChanged: (value) => _addProductController.onChangedDropDownButton(value, controller),
     );
   }
 
   List<DropdownMenuItem> buildDropDownMenuItemList() {
-    return _addProductController.brandList.map(
+    return dropdownList.map(
       (value) {
         return DropdownMenuItem(
           value: value,
