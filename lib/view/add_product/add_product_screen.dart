@@ -72,7 +72,7 @@ class AddProductScreen extends StatelessWidget {
             hintText: categoryHintText,
             dropdownHintText: dropdownCategoryHintText,
             isEnableDropDownButton: true,
-            index: 0,
+            dropdownList: _addProductController.categoryList,
           ),
           const SizedBox(height: paddingBoxHeight),
           MyFormRow(
@@ -81,7 +81,7 @@ class AddProductScreen extends StatelessWidget {
             hintText: brandHintText,
             dropdownHintText: dropdownBrandHintText,
             isEnableDropDownButton: true,
-            index: 1,
+            dropdownList: _addProductController.brandList,
           ),
           const SizedBox(height: paddingBoxHeight),
           MyFormRow(
@@ -103,7 +103,7 @@ class AddProductScreen extends StatelessWidget {
             hintText: currencyHintText,
             dropdownHintText: dropdownCurrencyHintText,
             isEnableDropDownButton: true,
-            index: 2,
+            dropdownList: _addProductController.currencyList,
           ),
           const SizedBox(height: paddingBoxHeight),
           buildAddProductButtonBox(),

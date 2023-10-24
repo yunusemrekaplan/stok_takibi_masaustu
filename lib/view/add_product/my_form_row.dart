@@ -20,24 +20,9 @@ class MyFormRow extends StatelessWidget {
     this.isEnableDropDownButton = false,
     this.dropdownHintText,
     this.isDouble = false,
-    this.index,
-  }) {
-    init();
-  }
+    this.dropdownList,
+  });
 
-  void init() {
-    if (isEnableDropDownButton == true) {
-      if (index == 0) {
-        dropdownList = _addProductController.categoryList;
-      }
-      else if (index == 1) {
-        dropdownList = _addProductController.brandList;
-      }
-      else if (index == 2) {
-        dropdownList = _addProductController.currencyList;
-      }
-    }
-  }
 
   final _addProductController = Get.find<AddProductController>();
   final List<TextInputFormatter> inputFormatters = [
@@ -50,10 +35,7 @@ class MyFormRow extends StatelessWidget {
   late String text;
   late String hintText;
   late String? dropdownHintText;
-  late String? dropdownValue;
-  late List<String> dropdownList;
-
-  int? index;
+  late List<String>? dropdownList;
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +92,7 @@ class MyFormRow extends StatelessWidget {
   }
 
   List<DropdownMenuItem> buildDropDownMenuItemList() {
-    return dropdownList.map(
+    return dropdownList!.map(
       (value) {
         return DropdownMenuItem(
           value: value,

@@ -14,7 +14,6 @@ class AddProductController extends GetxController {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController currencyController = TextEditingController();
 
-  RxList productList = [].obs;
   List<String> categoryList = [
     'Kulaklık',
     'Şarj Aleti',
