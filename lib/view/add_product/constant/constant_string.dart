@@ -1,0 +1,14 @@
+const barcodeText = 'Barkod:';
+const brandText = 'Marka:';
+const modelText = 'Model:';
+const priceText = 'Fiyat:';
+const currencyText = 'Para Birim:';
+const addCategoryAppBarTitle = 'Kategori Ekle';
+const barcodeHintText = 'Barkod Giriniz';
+const brandHintText = 'Marka Giriniz';
+const modelHintText = 'Model Giriniz';
+const priceHintText = 'Fiyat Giriniz';
+const currencyHintText = 'Para Birimi Giriniz';
+const addProductButtonText = 'Ürün Ekle';
+const validatorMessage = 'Lütfen bir değer giriniz.';
+const dropdownHintText = 'Marka Seçiniz';

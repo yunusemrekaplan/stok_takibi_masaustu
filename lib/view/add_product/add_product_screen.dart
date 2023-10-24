@@ -6,7 +6,11 @@ import '/model/enum/my_route.dart';
 import '/view/get_controller/theme_controller.dart';
 import '/view/widget/my_app_bar.dart';
 import 'add_product_controller.dart';
-import 'constant.dart';
+import 'constant/constant.dart';
+import 'constant/constant_double.dart';
+import 'constant/constant_enum.dart';
+import 'constant/constant_padding.dart';
+import 'constant/constant_string.dart';
 import 'widget/my_form_row.dart';
 
 class AddProductScreen extends StatelessWidget {
@@ -35,8 +39,8 @@ class AddProductScreen extends StatelessWidget {
     return Center(
       child: Obx(
         () => Container(
-          width: MediaQuery.of(context).size.width * 0.7,
-          height: MediaQuery.of(context).size.height * 0.8,
+          width: containerWidth,
+          height: containerHeight,
           decoration: BoxDecoration(
             color: _themeController.dataTableContainerColor.value,
             borderRadius: borderRadius,
@@ -66,6 +70,7 @@ class AddProductScreen extends StatelessWidget {
             controller: _addProductController.brandController,
             text: brandText,
             hintText: brandHintText,
+            isEnableDropDownButton: true,
           ),
           const SizedBox(height: paddingBoxHeight),
           MyFormRow(
@@ -78,6 +83,12 @@ class AddProductScreen extends StatelessWidget {
             controller: _addProductController.priceController,
             text: priceText,
             hintText: priceHintText,
+          ),
+          const SizedBox(height: paddingBoxHeight),
+          MyFormRow(
+            controller: _addProductController.currencyController,
+            text: currencyText,
+            hintText: currencyHintText,
           ),
           const SizedBox(height: paddingBoxHeight),
           buildAddProductButtonBox(),
