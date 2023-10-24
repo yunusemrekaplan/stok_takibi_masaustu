@@ -33,4 +33,17 @@ class AddProductController extends GetxController {
     brandController.text = dropdownValue!;
     update([MyRoute.addProductScreen.stringDefinition]); // setState
   }
+
+  void onAddProduct() {
+    Product product = Product(
+      barcode: barcodeController.text,
+      brand: brandController.text,
+      model: modelController.text,
+      price: double.parse(priceController.text),
+      currency: currencyController.text,
+      quantity: 0,
+    );
+
+    // firebase istek gönderen metodu try cathc içine al. Hata vermezse producyList'e ekle.
+  }
 }

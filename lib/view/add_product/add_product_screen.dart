@@ -11,7 +11,7 @@ import 'constant/constant_double.dart';
 import 'constant/constant_enum.dart';
 import 'constant/constant_padding.dart';
 import 'constant/constant_string.dart';
-import 'widget/my_form_row.dart';
+import 'my_form_row.dart';
 
 class AddProductScreen extends StatelessWidget {
   AddProductScreen({super.key});
@@ -83,6 +83,7 @@ class AddProductScreen extends StatelessWidget {
             controller: _addProductController.priceController,
             text: priceText,
             hintText: priceHintText,
+            isDouble: true,
           ),
           const SizedBox(height: paddingBoxHeight),
           MyFormRow(
@@ -118,7 +119,7 @@ class AddProductScreen extends StatelessWidget {
     changeValidateFailedState();
 
     if (!_addProductController.isValidateFailed) {
-      // onAddProduct();
+      _addProductController.onAddProduct();
     }
   }
 

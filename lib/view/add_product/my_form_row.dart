@@ -1,14 +1,15 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../add_product_controller.dart';
-import '../constant/constant.dart';
-import '../constant/constant_double.dart';
-import '../constant/constant_enum.dart';
-import '../constant/constant_padding.dart';
-import '../constant/constant_string.dart';
+import 'add_product_controller.dart';
+import 'constant/constant.dart';
+import 'constant/constant_double.dart';
+import 'constant/constant_enum.dart';
+import 'constant/constant_padding.dart';
+import 'constant/constant_string.dart';
 
 class MyFormRow extends StatelessWidget {
   MyFormRow({
@@ -17,6 +18,7 @@ class MyFormRow extends StatelessWidget {
     required this.text,
     required this.hintText,
     this.isEnableDropDownButton = false,
+    this.isDouble = false,
   });
 
   final _addProductController = Get.find<AddProductController>();
@@ -25,6 +27,10 @@ class MyFormRow extends StatelessWidget {
   late String text;
   late String hintText;
   final bool isEnableDropDownButton;
+  final bool isDouble;
+  final List<TextInputFormatter> inputFormatters = [
+    FilteringTextInputFormatter.digitsOnly,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +66,7 @@ class MyFormRow extends StatelessWidget {
         validator: validator,
         style: textFormFieldTextStyle,
         decoration: buildInputDecoration(hintText),
+        inputFormatters: isDouble == true ? inputFormatters : null,
       ),
     );
   }
