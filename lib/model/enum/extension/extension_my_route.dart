@@ -10,4 +10,3 @@ extension ToString on MyRoute {
     }
   }
 }
-

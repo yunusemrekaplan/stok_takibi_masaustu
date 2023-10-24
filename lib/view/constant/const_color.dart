@@ -15,10 +15,11 @@ const Color borderSideColor = Colors.white;
 
 
 const Color firstThemeAppBarColor = Color(0xFF1F3F65);
-//const Color firstThemeButtonColor = Color(0xFF043762);
+// const Color firstThemeButtonColor = Color(0xFF043762);
 const Color firstThemeButtonColor = Color(0xFF1F3F6E);
 const Color firstThemeScaffoldBackgroundColor = Color(0xFF34537F);
-const Color firstThemeContainerColor = Color(0xFF2F3F63);
+const Color firstThemeContainerColor = Color(0xAE2F3F63);
+// const Color firstThemeContainerColor = Color(0xFF2F3F63);
 const Color firstThemeDataTableHeadingRowColor = Color(0xFF1F3F6E);
 
 
