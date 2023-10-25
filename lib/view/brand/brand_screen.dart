@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../model/enum/my_route.dart';
 import '../theme/theme_controller.dart';
-import '/view/widget/my_app_bar.dart';
-import '/model/enum/my_route.dart';
-import 'category_controller.dart';
+import '../widget/my_app_bar.dart';
+import 'brand_controller.dart';
 import 'constant.dart';
 
-class CategoryScreen extends StatelessWidget {
-  CategoryScreen({super.key});
-  final _categoryController = Get.put(CategoryController());
+class BrandScreen extends StatelessWidget {
+  BrandScreen({super.key});
+
+  final _brandController = Get.put(BrandController());
   final _themeController = Get.find<ThemeController>();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: _categoryController,
+      init: _brandController,
       builder: (_) => buildScaffold(context),
-      id: MyRoute.categoryScreen,
+      id: MyRoute.brandScreen,
     );
   }
 
@@ -82,7 +83,7 @@ class CategoryScreen extends StatelessWidget {
           onSelectChanged: (value) {},
           cells: [
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),
@@ -98,7 +99,7 @@ class CategoryScreen extends StatelessWidget {
           cells: [
             // Todo: Veri uzunluk sınırı getirilecek,
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),
@@ -113,7 +114,7 @@ class CategoryScreen extends StatelessWidget {
         DataRow(
           cells: [
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),
@@ -128,7 +129,7 @@ class CategoryScreen extends StatelessWidget {
         DataRow(
           cells: [
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),
@@ -143,7 +144,7 @@ class CategoryScreen extends StatelessWidget {
         DataRow(
           cells: [
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),
@@ -158,7 +159,7 @@ class CategoryScreen extends StatelessWidget {
         DataRow(
           cells: [
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),
@@ -173,7 +174,7 @@ class CategoryScreen extends StatelessWidget {
         DataRow(
           cells: [
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),
@@ -188,7 +189,7 @@ class CategoryScreen extends StatelessWidget {
         DataRow(
           cells: [
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),
@@ -203,7 +204,7 @@ class CategoryScreen extends StatelessWidget {
         DataRow(
           cells: [
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),
@@ -218,7 +219,7 @@ class CategoryScreen extends StatelessWidget {
         DataRow(
           cells: [
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),
@@ -233,7 +234,7 @@ class CategoryScreen extends StatelessWidget {
         DataRow(
           cells: [
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),
@@ -248,7 +249,7 @@ class CategoryScreen extends StatelessWidget {
         DataRow(
           cells: [
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),
@@ -263,7 +264,7 @@ class CategoryScreen extends StatelessWidget {
         DataRow(
           cells: [
             DataCell(Text('D123')),
-            DataCell(Text('Kulaklık')),
+            DataCell(Text('Apple')),
             DataCell(Text('7')),
             DataCell(IconButton(
               icon: Icon(Icons.edit),

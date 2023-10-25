@@ -19,14 +19,14 @@ BorderRadius addButtonBorderRadius = BorderRadius.circular(
 
 const Axis tableScrollDirection = Axis.vertical;
 
-const String columnCodeText = 'Kategori Kodu';
-const String columnNameText = 'Kategori Adı';
+const String appBarTitle = 'Markalar';
+const String addButtonText = 'Marka Ekle';
+
+const String columnCodeText = 'Marka Kodu';
+const String columnNameText = 'Marka Adı';
 const String columnProductCountText = 'Ürün Sayısı';
 const String columnEditText = 'Düzenle';
 const String columnDeleteText = 'Sil';
-
-const String appBarTitle = 'Kategoriler';
-const String addButtonText = 'Kategori Ekle';
 
 const double tableRowPaddingDouble = 20.0;
 const double addButtonLeftPaddingDouble = 20.0;

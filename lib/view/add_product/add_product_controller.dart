@@ -14,7 +14,9 @@ class AddProductController extends GetxController {
   final TextEditingController currencyController = TextEditingController();
 
   /// ToDo category, brand, currency modeli oluşturulacak. Bu listeleri firebase'den çekilecek.
-  List<String> categoryList = [];
+  List<String> categoryList = [
+    'Bilgisayar',
+  ];
   List<String> brandList = [];
   List<String> currencyList = [];
 
@@ -22,12 +24,12 @@ class AddProductController extends GetxController {
 
   void changeValidateFailedState(bool state) {
     isValidateFailed = state;
-    update([MyRoute.addProductScreen.stringDefinition]); // setState
+    update([MyRoute.addProductScreen]); // setState
   }
 
   void onChangedDropDownButton(String value, TextEditingController controller) {
     controller.text = value.toString();
-    update([MyRoute.addProductScreen.stringDefinition]); // setState
+    update([MyRoute.addProductScreen]); // setState
   }
 
   void onAddProduct() {
