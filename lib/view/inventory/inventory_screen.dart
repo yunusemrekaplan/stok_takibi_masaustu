@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stok_takibi_masaustu/model/enum/my_route.dart';
-import 'package:stok_takibi_masaustu/view/constant/const_boolean.dart';
-import 'package:stok_takibi_masaustu/view/constant/const_border.dart';
-import 'package:stok_takibi_masaustu/view/constant/const_box_constraints.dart';
-import 'package:stok_takibi_masaustu/view/constant/const_color.dart';
-import 'package:stok_takibi_masaustu/view/constant/const_double.dart';
-import 'package:stok_takibi_masaustu/view/constant/const_icon.dart';
-import 'package:stok_takibi_masaustu/view/constant/const_padding.dart';
-import 'package:stok_takibi_masaustu/view/constant/const_string.dart';
-import 'package:stok_takibi_masaustu/view/constant/const_text_style.dart';
-import 'package:stok_takibi_masaustu/view/inventory/inventory_controller.dart';
-import 'package:stok_takibi_masaustu/view/get_controller/theme_controller.dart';
-import 'package:stok_takibi_masaustu/view/widget/my_app_bar.dart';
+
+import '/model/enum/my_route.dart';
+import '/view/constant/const_boolean.dart';
+import '/view/constant/const_border.dart';
+import '/view/constant/const_box_constraints.dart';
+import '/view/constant/const_color.dart';
+import '/view/constant/const_double.dart';
+import '/view/constant/const_icon.dart';
+import '/view/constant/const_padding.dart';
+import '/view/constant/const_string.dart';
+import '/view/constant/const_text_style.dart';
+import '/view/inventory/inventory_controller.dart';
+import '/view/theme/theme_controller.dart';
+import '/view/widget/my_app_bar.dart';
+import 'constant_string.dart';
 
 class InventoryScreen extends StatelessWidget {
   InventoryScreen({super.key});
@@ -44,7 +46,20 @@ class InventoryScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildDataTableRow(context),
-        buildAddProductButton(),
+        Row(
+          children: [
+            buildAddProductButton(),
+            Padding(
+              padding: addProductButtonPadding,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: borderRadius)),
+                child: const Text(addCategoryButtonText),
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -120,11 +135,12 @@ class InventoryScreen extends StatelessWidget {
     Stack searchBoxColumn = buildSearchBox(context);
     return [
       const DataColumn(label: Text(columnBarcode)),
-      const DataColumn(label: Text(columnName)),
+      const DataColumn(label: Text(columnCategory)),
       const DataColumn(label: Text(columnBrand)),
       const DataColumn(label: Text(columnModel)),
       const DataColumn(label: Text(columnPrice), numeric: columnPriceNumeric),
-      const DataColumn(label: Text(columnQuantity), numeric: columnQuantityNumeric),
+      const DataColumn(
+          label: Text(columnQuantity), numeric: columnQuantityNumeric),
       DataColumn(label: searchBoxColumn),
     ];
   }
@@ -158,7 +174,8 @@ class InventoryScreen extends StatelessWidget {
   Padding buildSearchIcon() {
     return Padding(
       padding: searchIconPadding,
-      child: Obx(() => Icon(searchIcon, color: _inventoryController.searchIconColor.value)),
+      child: Obx(() =>
+          Icon(searchIcon, color: _inventoryController.searchIconColor.value)),
     );
   }
 
@@ -167,7 +184,8 @@ class InventoryScreen extends StatelessWidget {
       padding: addProductButtonPadding,
       child: ElevatedButton(
         onPressed: () {},
-        style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: borderRadius)),
+        style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(borderRadius: borderRadius)),
         child: const Text(addProductButton),
       ),
     );

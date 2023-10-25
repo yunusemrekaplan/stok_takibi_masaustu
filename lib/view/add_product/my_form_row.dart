@@ -99,7 +99,7 @@ class MyFormRow extends StatelessWidget {
   }
 
   List<DropdownMenuItem> buildDropDownMenuItemList() {
-    return dropdownList!.map(
+    return dropdownList.map(
       (value) {
         return DropdownMenuItem(
           value: value,

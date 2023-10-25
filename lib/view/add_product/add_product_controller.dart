@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stok_takibi_masaustu/model/data/product.dart';
 
 import '/model/enum/extension/extension_my_route.dart';
 import '/model/enum/my_route.dart';
@@ -32,6 +31,7 @@ class AddProductController extends GetxController {
   }
 
   void onAddProduct() {
+    /*
     Product product = Product(
       barcode: barcodeController.text,
       brand: brandController.text,
@@ -40,6 +40,7 @@ class AddProductController extends GetxController {
       currency: currencyController.text,
       quantity: 0,
     );
+    */
 
     /// ToDo firebase istek gönderen metodu try cathc içine al. Hata vermezse producyList'e ekle.
   }

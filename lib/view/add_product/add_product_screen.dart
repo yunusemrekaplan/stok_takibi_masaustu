@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '/model/enum/extension/extension_my_route.dart';
 import '/model/enum/my_route.dart';
-import '/view/get_controller/theme_controller.dart';
+import '../theme/theme_controller.dart';
 import '/view/widget/my_app_bar.dart';
 import 'add_product_controller.dart';
 import 'constant/constant.dart';

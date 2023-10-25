@@ -5,7 +5,7 @@ const loginButtonText = 'Login';
 const loginFailedMessage = 'Login failed';
 
 const String columnBarcode = 'Barkod';
-const String columnName = 'İsim';
+const String columnCategory = 'Kategori';
 const String columnBrand = 'Marka';
 const String columnModel = 'Model';
 const String columnPrice = 'Fiyat';

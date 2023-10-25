@@ -7,6 +7,8 @@ extension ToString on MyRoute {
         return '/inventoryScreen';
       case MyRoute.addProductScreen:
         return '/addProductScreen';
+      case MyRoute.categoryScreen:
+        return '/categoryScreen';
     }
   }
 }
