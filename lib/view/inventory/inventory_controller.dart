@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stok_takibi_masaustu/model/data_model/product.dart';
+import 'package:stok_takibi_masaustu/model/data/product.dart';
 
 class InventoryController extends GetxController {
   RxList<Product>? products = <Product>[].obs;

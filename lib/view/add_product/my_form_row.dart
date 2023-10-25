@@ -20,9 +20,8 @@ class MyFormRow extends StatelessWidget {
     this.isEnableDropDownButton = false,
     this.dropdownHintText,
     this.isDouble = false,
-    this.dropdownList,
+    this.dropdownList = const [],
   });
-
 
   final _addProductController = Get.find<AddProductController>();
   final List<TextInputFormatter> inputFormatters = [
@@ -35,7 +34,7 @@ class MyFormRow extends StatelessWidget {
   late String text;
   late String hintText;
   late String? dropdownHintText;
-  late List<String>? dropdownList;
+  late List<String> dropdownList;
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +43,17 @@ class MyFormRow extends StatelessWidget {
       children: [
         buildTextBox(),
         buildTextFormField(hintText),
-        SizedBox(
-          width: dropdownWidth,
-          child: isEnableDropDownButton == true ? buildDropDownButton() : null,
-        ),
+        (isEnableDropDownButton == true
+            ? (dropdownList.isNotEmpty ? buildDropdownButtonBox() : Container())
+            : Container()),
       ],
+    );
+  }
+
+  SizedBox buildDropdownButtonBox() {
+    return SizedBox(
+      width: dropdownWidth,
+      child: buildDropDownButton(),
     );
   }
 
@@ -85,9 +90,11 @@ class MyFormRow extends StatelessWidget {
       hint: Text(dropdownHintText!, style: dropdownHintTextStyle),
       style: dropdownButtonTextStyle,
       padding: dropdownPadding,
-      underline: Container(height: dropdownButtonUnderlineHeight, color: underLineColor),
+      underline: Container(
+          height: dropdownButtonUnderlineHeight, color: underLineColor),
       items: buildDropDownMenuItemList(),
-      onChanged: (value) => _addProductController.onChangedDropDownButton(value, controller),
+      onChanged: (value) =>
+          _addProductController.onChangedDropDownButton(value, controller),
     );
   }
 

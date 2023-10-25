@@ -17,7 +17,8 @@ class AddProductScreen extends StatelessWidget {
   AddProductScreen({super.key});
 
   final ThemeController _themeController = Get.find<ThemeController>();
-  final AddProductController _addProductController = Get.put(AddProductController());
+  final AddProductController _addProductController =
+      Get.put(AddProductController());
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +40,8 @@ class AddProductScreen extends StatelessWidget {
     return Center(
       child: Obx(
         () => Container(
-          width: containerWidth,
-          height: containerHeight,
+          width: MediaQuery.of(context).size.width * containerWidth,
+          height: MediaQuery.of(context).size.height * containerHeight,
           decoration: BoxDecoration(
             color: _themeController.dataTableContainerColor.value,
             borderRadius: borderRadius,
@@ -59,57 +60,61 @@ class AddProductScreen extends StatelessWidget {
       autovalidateMode: isAutoValidateMode(),
       child: Column(
         mainAxisAlignment: formMainAxisAlignment,
-        children: [
-          MyFormRow(
-            controller: _addProductController.barcodeController,
-            text: barcodeText,
-            hintText: barcodeHintText,
-          ),
-          const SizedBox(height: paddingBoxHeight),
-          MyFormRow(
-            controller: _addProductController.categoryController,
-            text: categoryText,
-            hintText: categoryHintText,
-            dropdownHintText: dropdownCategoryHintText,
-            isEnableDropDownButton: true,
-            dropdownList: _addProductController.categoryList,
-          ),
-          const SizedBox(height: paddingBoxHeight),
-          MyFormRow(
-            controller: _addProductController.brandController,
-            text: brandText,
-            hintText: brandHintText,
-            dropdownHintText: dropdownBrandHintText,
-            isEnableDropDownButton: true,
-            dropdownList: _addProductController.brandList,
-          ),
-          const SizedBox(height: paddingBoxHeight),
-          MyFormRow(
-            controller: _addProductController.modelController,
-            text: modelText,
-            hintText: modelHintText,
-          ),
-          const SizedBox(height: paddingBoxHeight),
-          MyFormRow(
-            controller: _addProductController.priceController,
-            text: priceText,
-            hintText: priceHintText,
-            isDouble: true,
-          ),
-          const SizedBox(height: paddingBoxHeight),
-          MyFormRow(
-            controller: _addProductController.currencyController,
-            text: currencyText,
-            hintText: currencyHintText,
-            dropdownHintText: dropdownCurrencyHintText,
-            isEnableDropDownButton: true,
-            dropdownList: _addProductController.currencyList,
-          ),
-          const SizedBox(height: paddingBoxHeight),
-          buildAddProductButtonBox(),
-        ],
+        children: buildFromChildren,
       ),
     );
+  }
+
+  List<Widget> get buildFromChildren {
+    return [
+      MyFormRow(
+        controller: _addProductController.barcodeController,
+        text: barcodeText,
+        hintText: barcodeHintText,
+      ),
+      const SizedBox(height: paddingBoxHeight),
+      MyFormRow(
+        controller: _addProductController.categoryController,
+        text: categoryText,
+        hintText: categoryHintText,
+        dropdownHintText: dropdownCategoryHintText,
+        isEnableDropDownButton: true,
+        dropdownList: _addProductController.categoryList,
+      ),
+      const SizedBox(height: paddingBoxHeight),
+      MyFormRow(
+        controller: _addProductController.brandController,
+        text: brandText,
+        hintText: brandHintText,
+        dropdownHintText: dropdownBrandHintText,
+        isEnableDropDownButton: true,
+        dropdownList: _addProductController.brandList,
+      ),
+      const SizedBox(height: paddingBoxHeight),
+      MyFormRow(
+        controller: _addProductController.modelController,
+        text: modelText,
+        hintText: modelHintText,
+      ),
+      const SizedBox(height: paddingBoxHeight),
+      MyFormRow(
+        controller: _addProductController.priceController,
+        text: priceText,
+        hintText: priceHintText,
+        isDouble: true,
+      ),
+      const SizedBox(height: paddingBoxHeight),
+      MyFormRow(
+        controller: _addProductController.currencyController,
+        text: currencyText,
+        hintText: currencyHintText,
+        dropdownHintText: dropdownCurrencyHintText,
+        isEnableDropDownButton: true,
+        dropdownList: _addProductController.currencyList,
+      ),
+      const SizedBox(height: paddingBoxHeight),
+      buildAddProductButtonBox(),
+    ];
   }
 
   SizedBox buildAddProductButtonBox() {
@@ -125,7 +130,8 @@ class AddProductScreen extends StatelessWidget {
   ElevatedButton buildAddProductButton() {
     return ElevatedButton(
       onPressed: onPressedAddProductButton,
-      child: const Text(addProductButtonText, style: TextStyle(fontSize: addProductButtonTextSize)),
+      child: const Text(addProductButtonText,
+          style: TextStyle(fontSize: addProductButtonTextSize)),
     );
   }
 
@@ -138,8 +144,8 @@ class AddProductScreen extends StatelessWidget {
   }
 
   void changeValidateFailedState() {
-    _addProductController
-        .changeValidateFailedState(!_addProductController.formKey.currentState!.validate());
+    _addProductController.changeValidateFailedState(
+        !_addProductController.formKey.currentState!.validate());
   }
 
   AutovalidateMode isAutoValidateMode() =>

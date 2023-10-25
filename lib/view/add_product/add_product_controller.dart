@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stok_takibi_masaustu/model/data_model/product.dart';
+import 'package:stok_takibi_masaustu/model/data/product.dart';
 
 import '/model/enum/extension/extension_my_route.dart';
 import '/model/enum/my_route.dart';
@@ -14,21 +14,10 @@ class AddProductController extends GetxController {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController currencyController = TextEditingController();
 
-  List<String> categoryList = [
-    'Kulaklık',
-    'Şarj Aleti',
-    'Klavye',
-  ];
-  List<String> brandList = [
-    'Apple',
-    'Samsung',
-    'Huawei',
-  ];
-  List<String> currencyList = [
-    'Try',
-    'Usd',
-    'Eur',
-  ];
+  /// ToDo category, brand, currency modeli oluşturulacak. Bu listeleri firebase'den çekilecek.
+  List<String> categoryList = [];
+  List<String> brandList = [];
+  List<String> currencyList = [];
 
   bool isValidateFailed = false;
 
@@ -38,7 +27,6 @@ class AddProductController extends GetxController {
   }
 
   void onChangedDropDownButton(String value, TextEditingController controller) {
-    //dropdownValue = value.toString();
     controller.text = value.toString();
     update([MyRoute.addProductScreen.stringDefinition]); // setState
   }
@@ -53,6 +41,6 @@ class AddProductController extends GetxController {
       quantity: 0,
     );
 
-    // firebase istek gönderen metodu try cathc içine al. Hata vermezse producyList'e ekle.
+    /// ToDo firebase istek gönderen metodu try cathc içine al. Hata vermezse producyList'e ekle.
   }
 }
