@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/model/enum/extension/extension_my_route.dart';
 import '/model/enum/my_route.dart';
 
 class AddProductController extends GetxController {
@@ -14,9 +13,7 @@ class AddProductController extends GetxController {
   final TextEditingController currencyController = TextEditingController();
 
   /// ToDo category, brand, currency modeli oluşturulacak. Bu listeleri firebase'den çekilecek.
-  List<String> categoryList = [
-    'Bilgisayar',
-  ];
+  List<String> categoryList = [];
   List<String> brandList = [];
   List<String> currencyList = [];
 

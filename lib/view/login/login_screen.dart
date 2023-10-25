@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stok_takibi_masaustu/model/enum/my_route.dart';
-import 'package:stok_takibi_masaustu/view/widget/my_app_bar.dart';
 
+import '/view/validator.dart';
+import '/model/enum/my_route.dart';
+import '/view/widget/my_app_bar.dart';
+import 'constant.dart';
 import 'login_controller.dart';
+import 'login_text_form_field.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   final _loginController = Get.put(LoginController());
+  final Validator _validator = Validator();
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +48,14 @@ class LoginScreen extends StatelessWidget {
             controller: _loginController.emailController,
             visibilityButton: null,
             hintText: emailHintText,
-            validator: _validator.validatorOfEmail,
+            validator: _validator.validateEmail,
             obscureText: false,
           ),
-          buildTextFormField(
+          LoginTextFormField(
             controller: _loginController.passwordController,
-            visibilityButton: buildVisibilityButton(),
+            visibilityButton: null,
             hintText: passwordHintText,
-            validator: _validator.validatorOfPassword,
+            validator: _validator.validatePassword,
             obscureText: !_loginController.passwordVisible,
           ),
           buildLoginButton(context),
@@ -59,4 +63,27 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+
+  ElevatedButton buildLoginButton(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () => _loginController.onPressedLoginButton(context),
+      child: const Text(loginButtonText),
+    );
+  }
+
+  IconButton buildVisibilityButton() {
+    return IconButton(
+      icon: Icon(_loginController.passwordVisible
+          ? Icons.visibility
+          : Icons.visibility_off),
+      onPressed: _loginController.passwordVisibility,
+      color: iconColor,
+      highlightColor: transparentColor,
+      splashColor: transparentColor,
+      hoverColor: transparentColor,
+    );
+  }
+
+  AutovalidateMode isAutoValidateMode() =>
+      _loginController.isValidateFailed ? always : disabled;
 }
