@@ -1,19 +1,19 @@
 class Log {
   final DateTime dateTime;
   final String state;
-  final String errorMessage;
+  final String message;
 
   Log({
     required this.dateTime,
     required this.state,
-    required this.errorMessage,
+    required this.message,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'dateTime': dateTime,
       'state': state,
-      'errorMessage': errorMessage,
+      'message': message,
     };
   }
 
@@ -21,7 +21,7 @@ class Log {
     return Log(
       dateTime: map['dateTime'],
       state: map['state'],
-      errorMessage: map['errorMessage'],
+      message: map['message'],
     );
   }
 }

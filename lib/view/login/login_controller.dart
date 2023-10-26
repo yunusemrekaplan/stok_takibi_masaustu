@@ -2,7 +2,13 @@ import 'package:firedart/auth/user_gateway.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '/model/data/log.dart';
+import '/model/enum/extension/extension_doc_name.dart';
+import '/model/enum/extension/extension_log_state.dart';
 import '../../controller/auth_service.dart';
+import '../../controller/firestore_service.dart';
+import '../../model/enum/doc_name.dart';
+import '../../model/enum/log_state.dart';
 import '../../model/enum/my_route.dart';
 import '../widget/show_dialogs.dart';
 import '../widget/snack_bars.dart';
@@ -59,8 +65,18 @@ class LoginController extends GetxController {
   }
 
   void onLoginSuccessful(User user) {
-    // veri ekleme kodu // bir sınıfa ata // ToDo: silinecek
-    //FirestoreDbService(id: user.id);
+    FirestoreDbService(id: user.id);
+    Log log = Log(
+      dateTime: DateTime.now(),
+      state: LogState.successfulSignIn.stringDefinition,
+      message: LogState.successfulSignIn.messageDefinition,
+    );
+
+    FirestoreDbService().addData(
+      docName: DocName.logs.stringDefinition,
+      data: log.toMap(),
+    );
+
     Get.back();
     _snackBars.buildSnackBar(Get.context, 'Login successful', Colors.green);
   }

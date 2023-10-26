@@ -16,7 +16,7 @@ class AuthService {
       Log(
         dateTime: DateTime.now(),
         state: 'Sign In Error',
-        errorMessage: e.toString(),
+        message: e.toString(),
       );
     }
     return user;
