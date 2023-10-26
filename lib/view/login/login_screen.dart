@@ -28,9 +28,11 @@ class LoginScreen extends StatelessWidget {
       appBar: myAppBar('Giriş Ekranı'),
       body: Center(
         child: Container(
-          color: Colors.grey.shade300,
-          width: MediaQuery.of(context).size.width * 0.6,
-          height: MediaQuery.of(context).size.height * 0.7,
+          decoration: BoxDecoration(
+            borderRadius: borderRadius,
+          ),
+          width: containerWidth,
+          height: containerHeight,
           child: buildLoginForm(context),
         ),
       ),
@@ -46,14 +48,13 @@ class LoginScreen extends StatelessWidget {
         children: [
           LoginTextFormField(
             controller: _loginController.emailController,
-            visibilityButton: null,
             hintText: emailHintText,
             validator: _validator.validateEmail,
             obscureText: false,
           ),
           LoginTextFormField(
             controller: _loginController.passwordController,
-            visibilityButton: null,
+            visibilityButton: buildVisibilityButton(),
             hintText: passwordHintText,
             validator: _validator.validatePassword,
             obscureText: !_loginController.passwordVisible,
@@ -67,7 +68,12 @@ class LoginScreen extends StatelessWidget {
   ElevatedButton buildLoginButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () => _loginController.onPressedLoginButton(context),
-      child: const Text(loginButtonText),
+      child: const Text(
+        loginButtonText,
+        style: TextStyle(
+          fontSize: loginButtonTextFontSize,
+        ),
+      ),
     );
   }
 

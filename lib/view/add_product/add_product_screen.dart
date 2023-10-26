@@ -42,7 +42,7 @@ class AddProductScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width * containerWidth,
           height: MediaQuery.of(context).size.height * containerHeight,
           decoration: BoxDecoration(
-            color: _themeController.dataTableContainerColor.value,
+            color: _themeController.containerColor.value,
             borderRadius: borderRadius,
           ),
           child: Center(

@@ -6,15 +6,15 @@ import 'package:stok_takibi_masaustu/view/theme/theme_sec.dart';
 
 class ThemeController extends GetxController {
   RxBool isFirstTheme = true.obs;
-  Rx<Color> dataTableContainerColor = firstThemeContainerColor.obs;
+  Rx<Color> containerColor = firstThemeContainerColor.obs;
 
   void changeTheme() {
     isFirstTheme.value = !isFirstTheme.value;
     if (isFirstTheme.value) {
       Get.changeTheme(themeFirst);
-      dataTableContainerColor.value = firstThemeContainerColor;
+      containerColor.value = firstThemeContainerColor;
     } else {
-      dataTableContainerColor.value = secThemeContainerColor;
+      containerColor.value = secThemeContainerColor;
       Get.changeTheme(themeSec);
     }
     update();

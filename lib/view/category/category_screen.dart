@@ -56,7 +56,7 @@ class CategoryScreen extends StatelessWidget {
     return Obx(
       () => Container(
         decoration: BoxDecoration(
-          color: _themeController.dataTableContainerColor.value,
+          color: _themeController.containerColor.value,
           borderRadius: tableContainerBorderRadius,
         ),
         child: SingleChildScrollView(

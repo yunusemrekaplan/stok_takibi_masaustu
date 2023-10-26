@@ -2,9 +2,16 @@ import 'package:firedart/auth/user_gateway.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controller/auth_service.dart';
 import '../../model/enum/my_route.dart';
+import '../widget/show_dialogs.dart';
+import '../widget/snack_bars.dart';
+import 'constant.dart';
 
 class LoginController extends GetxController {
+  final AuthService _authService = AuthService();
+  final ShowDialogs _showDialogs = ShowDialogs();
+  final SnackBars _snackBars = SnackBars();
   final GlobalKey<FormState> formKey = GlobalKey();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -32,27 +39,29 @@ class LoginController extends GetxController {
   }
 
   void onLogin(BuildContext context) async {
-    /*
     _showDialogs.loadingDialog(context);
 
     User? user = await _authService.signIn(
-      email: loginController.emailController.text,
-      password: loginController.passwordController.text,
+      email: emailController.text,
+      password: passwordController.text,
     );
 
-    user == null ? onLoginFailed() : onLoginSuccessful(user);*/
+    user == null ? onLoginFailed() : onLoginSuccessful(user);
   }
 
   void onLoginFailed() {
     Get.back();
-    //_snackBars.buildSnackBar(Get.context, loginFailedMessage, Colors.red);
+    _snackBars.buildSnackBar(
+      Get.context,
+      loginFailedMessage,
+      snackBarFailedColor,
+    );
   }
 
   void onLoginSuccessful(User user) {
     // veri ekleme kodu // bir sınıfa ata // ToDo: silinecek
     //FirestoreDbService(id: user.id);
     Get.back();
-    // buildSnackBar(Get.context, 'Login successful', Colors.green);
-    Get.offNamed("/home");
+    _snackBars.buildSnackBar(Get.context, 'Login successful', Colors.green);
   }
 }

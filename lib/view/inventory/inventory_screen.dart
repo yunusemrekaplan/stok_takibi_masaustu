@@ -83,7 +83,7 @@ class InventoryScreen extends StatelessWidget {
       () => Container(
         width: MediaQuery.of(context).size.width * 0.75,
         decoration: BoxDecoration(
-          color: _themeController.dataTableContainerColor.value,
+          color: _themeController.containerColor.value,
           borderRadius: borderRadius,
         ),
         child: SingleChildScrollView(
