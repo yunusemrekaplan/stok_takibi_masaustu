@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../validator.dart';
 import 'add_product_controller.dart';
 import 'constant/constant.dart';
+import 'constant/constant_color.dart';
 import 'constant/constant_double.dart';
 import 'constant/constant_enum.dart';
 import 'constant/constant_padding.dart';
-import 'constant/constant_string.dart';
+import 'constant/constant_text_style.dart';
 
 class MyFormRow extends StatelessWidget {
   MyFormRow({
@@ -24,6 +26,8 @@ class MyFormRow extends StatelessWidget {
   });
 
   final _addProductController = Get.find<AddProductController>();
+  final _validator = Validator();
+
   final List<TextInputFormatter> inputFormatters = [
     FilteringTextInputFormatter.digitsOnly,
   ];
@@ -38,24 +42,17 @@ class MyFormRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return buildRow();
+  }
+
+  Row buildRow() {
     return Row(
       mainAxisAlignment: formRowMainAxisAlignment,
       children: [
         buildTextBox(),
         buildTextFormField(hintText),
-
-        /// ToDo bozuk
-        (isEnableDropDownButton == true
-            ? (dropdownList.isNotEmpty ? buildDropdownButtonBox() : Container())
-            : Container()),
+        buildDropDownButtonOrContainer(),
       ],
-    );
-  }
-
-  SizedBox buildDropdownButtonBox() {
-    return SizedBox(
-      width: dropdownWidth,
-      child: buildDropDownButton(),
     );
   }
 
@@ -75,11 +72,26 @@ class MyFormRow extends StatelessWidget {
       padding: textFormFieldPadding,
       child: TextFormField(
         controller: controller,
-        validator: validator,
+        validator: _validator.validateEmpty,
         style: textFormFieldTextStyle,
         decoration: buildInputDecoration(hintText),
         inputFormatters: isDouble == true ? inputFormatters : null,
       ),
+    );
+  }
+
+  Widget buildDropDownButtonOrContainer() {
+    return (isEnableDropDownButton == true
+        ? (dropdownList.isNotEmpty
+            ? buildDropdownButtonBox()
+            : Container(width: dropdownWidth))
+        : Container(width: dropdownWidth));
+  }
+
+  SizedBox buildDropdownButtonBox() {
+    return SizedBox(
+      width: dropdownWidth,
+      child: buildDropDownButton(),
     );
   }
 
@@ -120,12 +132,5 @@ class MyFormRow extends StatelessWidget {
       contentPadding: contentPadding,
       constraints: boxConstraints,
     );
-  }
-
-  String? validator(String? value) {
-    if (value!.isEmpty) {
-      return validatorMessage;
-    }
-    return null;
   }
 }

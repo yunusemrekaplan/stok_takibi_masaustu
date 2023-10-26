@@ -15,4 +15,6 @@ const EdgeInsets textFormFieldPadding = EdgeInsets.only(
   right: textFormFieldPaddingRight,
   bottom: textFormFieldPaddingBottom,
 );
-const EdgeInsets dropdownPadding = EdgeInsets.only(bottom: dropdownPaddingBottom);
+const EdgeInsets dropdownPadding = EdgeInsets.only(
+  bottom: dropdownPaddingBottom,
+);

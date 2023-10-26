@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/model/enum/extension/extension_my_route.dart';
 import '/model/enum/my_route.dart';
 import '../theme/theme_controller.dart';
 import '/view/widget/my_app_bar.dart';
@@ -25,7 +24,7 @@ class AddProductScreen extends StatelessWidget {
     return GetBuilder(
       init: _addProductController,
       builder: (_) => buildScaffold(context),
-      id: MyRoute.addProductScreen.stringDefinition,
+      id: MyRoute.addProductScreen,
     );
   }
 
@@ -130,8 +129,10 @@ class AddProductScreen extends StatelessWidget {
   ElevatedButton buildAddProductButton() {
     return ElevatedButton(
       onPressed: onPressedAddProductButton,
-      child: const Text(addProductButtonText,
-          style: TextStyle(fontSize: addProductButtonTextSize)),
+      child: const Text(
+        addProductButtonText,
+        style: TextStyle(fontSize: addProductButtonTextSize),
+      ),
     );
   }
 

@@ -16,3 +16,4 @@ const String inventoryScreenAppBarTitle = 'Envanter';
 const String addProductScreenAppBarTitle = 'Ürün Ekle';
 
 const String addProductButton = 'Ürün Ekle';
+const validatorMessage = 'Lütfen bir değer giriniz.';

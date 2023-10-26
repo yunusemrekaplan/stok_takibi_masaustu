@@ -12,7 +12,6 @@ const modelHintText = 'Model Giriniz';
 const priceHintText = 'Fiyat Giriniz';
 const currencyHintText = 'Para Birimi Giriniz';
 const addProductButtonText = 'Ürün Ekle';
-const validatorMessage = 'Lütfen bir değer giriniz.';
 const dropdownCategoryHintText = 'Kategori Seçiniz';
 const dropdownBrandHintText = 'Marka Seçiniz';
 const dropdownCurrencyHintText = 'Para Birimi Seçiniz';

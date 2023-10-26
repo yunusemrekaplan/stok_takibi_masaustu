@@ -1,3 +1,5 @@
+import 'constant/const_string.dart';
+
 class Validator {
   static final Validator _instance = Validator._internal();
 
@@ -20,6 +22,13 @@ class Validator {
   String? validatePassword(String? value) {
     if (value == null || value.length < 8) {
       return passwordReturnText;
+    }
+    return null;
+  }
+
+  String? validateEmpty(String? value) {
+    if (value!.isEmpty) {
+      return validatorMessage;
     }
     return null;
   }
