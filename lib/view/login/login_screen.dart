@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/view/validator.dart';
+import '../widget/validator.dart';
 import '/model/enum/my_route.dart';
 import '/view/widget/my_app_bar.dart';
 import 'constant.dart';

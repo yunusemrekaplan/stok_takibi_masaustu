@@ -1,1 +1,0 @@
-const addCategoryButtonText = 'Kategori Ekle';

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../validator.dart';
+import '../widget/validator.dart';
 import 'add_product_controller.dart';
 import 'constant/constant.dart';
 import 'constant/constant_color.dart';

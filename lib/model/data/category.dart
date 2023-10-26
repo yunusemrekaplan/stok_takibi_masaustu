@@ -1,5 +1,5 @@
 class Category {
-  late int id;
+  late String id;
   late String code;
   late String name;
   late int productCount;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stok_takibi_masaustu/view/constant/const_color.dart';
-import 'package:stok_takibi_masaustu/view/constant/const_text_style.dart';
+
+import 'constant.dart';
 
 final themeSec = ThemeData(
   appBarTheme: appBarTheme(),
@@ -28,7 +28,8 @@ ElevatedButtonThemeData elevatedButtonThemeData() {
 
 DataTableThemeData dataTableThemeData() {
   return DataTableThemeData(
-    headingRowColor: MaterialStateProperty.all<Color>(secThemeDataTableHeadingRowColor),
+    headingRowColor:
+        MaterialStateProperty.all<Color>(secThemeDataTableHeadingRowColor),
     dataRowColor: MaterialStateProperty.resolveWith<Color?>(
       (Set<MaterialState> states) {
         if (states.contains(MaterialState.hovered)) {

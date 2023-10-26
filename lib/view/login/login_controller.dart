@@ -5,11 +5,12 @@ import 'package:get/get.dart';
 import '/model/data/log.dart';
 import '/model/enum/extension/extension_doc_name.dart';
 import '/model/enum/extension/extension_log_state.dart';
-import '../../controller/auth_service.dart';
-import '../../controller/firestore_service.dart';
-import '../../model/enum/doc_name.dart';
-import '../../model/enum/log_state.dart';
-import '../../model/enum/my_route.dart';
+import '/model/enum/extension/extension_my_route.dart';
+import '/controller/service/auth_service.dart';
+import '/controller/service/firestore_service.dart';
+import '/model/enum/doc_name.dart';
+import '/model/enum/log_state.dart';
+import '/model/enum/my_route.dart';
 import '../widget/show_dialogs.dart';
 import '../widget/snack_bars.dart';
 import 'constant.dart';
@@ -77,7 +78,20 @@ class LoginController extends GetxController {
       data: log.toMap(),
     );
 
-    Get.back();
-    _snackBars.buildSnackBar(Get.context, 'Login successful', Colors.green);
+    /*
+    FirestoreDbService().addData(
+      docName: DocName.products.stringDefinition,
+      data: Product(
+        barcode: '1234567890',
+        category: 'Kulaklık',
+        brand: 'Apple',
+        model: 'A21',
+        price: 20,
+        currency: 'Usd',
+        quantity: 13,
+      ).toMap(),
+    );*/
+
+    Get.offAllNamed(MyRoute.inventoryScreen.stringDefinition);
   }
 }

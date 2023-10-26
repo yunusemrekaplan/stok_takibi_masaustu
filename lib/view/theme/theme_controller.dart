@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stok_takibi_masaustu/view/constant/const_color.dart';
-import 'package:stok_takibi_masaustu/view/theme/theme_first.dart';
-import 'package:stok_takibi_masaustu/view/theme/theme_sec.dart';
+
+import 'theme_first.dart';
+import 'theme_sec.dart';
+import 'constant.dart';
 
 class ThemeController extends GetxController {
   RxBool isFirstTheme = true.obs;

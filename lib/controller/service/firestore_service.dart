@@ -1,6 +1,6 @@
 import 'package:firedart/firedart.dart';
 
-import '../model/data/log.dart';
+import '/model/data/log.dart';
 
 class FirestoreDbService {
   static final FirestoreDbService _instance = FirestoreDbService._internal();
@@ -17,10 +17,8 @@ class FirestoreDbService {
   FirestoreDbService._internal();
 
   // document = table
-  Future<void> addData({
-    required String docName,
-    required Map<String, dynamic> data,
-  }) async {
+  Future<void> addData(
+      {required String docName, required Map<String, dynamic> data}) async {
     try {
       await _db.collection(docName).add(data);
     } catch (e) {
@@ -30,6 +28,11 @@ class FirestoreDbService {
         message: e.toString(),
       );
     }
+  }
+
+  Future<Page<Document>> getData({required String docName}) async {
+    final CollectionReference ref = _db.collection(docName);
+    return await ref.get();
   }
 
   // Future<void> setData({String path, Map<String, dynamic> data}) async {
@@ -47,10 +50,6 @@ class FirestoreDbService {
   //   await ref.delete();
   // }
   //
-  // Future<DocumentSnapshot> getData({String path}) async {
-  //   final DocumentReference ref = _db.doc(path);
-  //   return await ref.get();
-  // }
   //
   // Future<QuerySnapshot> getListData({String path}) async {
   //   final DocumentReference ref = _db.doc(path);

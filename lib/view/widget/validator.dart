@@ -1,4 +1,4 @@
-import 'constant/const_string.dart';
+import 'constant.dart';
 
 class Validator {
   static final Validator _instance = Validator._internal();
