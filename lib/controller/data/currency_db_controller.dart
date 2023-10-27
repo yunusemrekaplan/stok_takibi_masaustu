@@ -19,19 +19,18 @@ class CurrencyDbController {
 
   CurrencyDbController._internal();
 
+  RxList<Currency>? currencies = <Currency>[].obs;
   final _firestoreDbService = FirestoreDbService();
   final _snackBars = SnackBars();
   final getCurrenciesErrorMessage =
       'Para birimleri getirilirken bir hata oluştu.';
 
-  Future<List<Currency>> getCurrencies() async {
-    List<Currency> currencies = [];
-
+  Future<void> getCurrencies() async {
     try {
       final snapshot = await _firestoreDbService.getData(
         docName: DocName.categories.stringDefinition,
       );
-      currencies = snapshot
+      currencies!.value = snapshot
           .map(
             (e) => Currency.fromMap(map: e.map, id: e.id),
           )
@@ -53,7 +52,5 @@ class CurrencyDbController {
         data: log.toMap(),
       );
     }
-
-    return currencies;
   }
 }

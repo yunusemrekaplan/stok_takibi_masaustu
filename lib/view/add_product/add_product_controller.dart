@@ -10,27 +10,27 @@ import '/model/data/category.dart';
 import '/model/data/currency.dart';
 import '/model/data/product.dart';
 import '/model/enum/my_route.dart';
+import 'constant/constant.dart';
 import 'constant/constant_enum.dart';
 
 class AddProductController extends GetxController {
   final Rx<GlobalKey<FormState>> formKey = GlobalKey<FormState>().obs;
-  final TextEditingController barcodeController = TextEditingController();
-  final TextEditingController categoryController = TextEditingController();
-  final TextEditingController brandController = TextEditingController();
-  final TextEditingController modelController = TextEditingController();
-  final TextEditingController priceController = TextEditingController();
-  final TextEditingController currencyController = TextEditingController();
-
   final _productDbController = ProductDbController();
   final _categoryDbController = CategoryDbController();
   final _brandDbController = BrandDbController();
   final _currencyDbController = CurrencyDbController();
 
-  RxList<Category>? categoryList = <Category>[].obs;
-  RxList<Brand>? brandList = <Brand>[].obs;
-  RxList<Currency>? currencyList = <Currency>[].obs;
-
   Rx<bool> isValidateFailed = false.obs;
+
+  RxList<Category>? get categories => _categoryDbController.categories;
+  RxList<Brand>? get brands => _brandDbController.brands;
+  RxList<Currency>? get currencies => _currencyDbController.currencies;
+
+  Future<void> getLists() async {
+    await _categoryDbController.getCategories();
+    await _brandDbController.getBrands();
+    await _currencyDbController.getCurrencies();
+  }
 
   AutovalidateMode isAutoValidateMode() =>
       isValidateFailed.value ? always : disabled;
@@ -48,12 +48,6 @@ class AddProductController extends GetxController {
     }
   }
 
-  Future<void> getLists() async {
-    categoryList!.value = await _categoryDbController.getCategories();
-    brandList!.value = await _brandDbController.getBrands();
-    currencyList!.value = await _currencyDbController.getCurrencies();
-  }
-
   Future<void> onAddProduct() async {
     Product product = Product(
       barcode: barcodeController.text,
@@ -67,7 +61,7 @@ class AddProductController extends GetxController {
 
     await _productDbController.addProduct(product);
 
-    update([MyRoute.addProductScreen]);
+    // update([MyRoute.addProductScreen]);
 
     /// ToDo firebase istek gönderen metodu try cathc içine al. Hata vermezse producyList'e ekle.
   }

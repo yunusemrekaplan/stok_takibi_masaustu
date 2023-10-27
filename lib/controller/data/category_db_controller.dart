@@ -19,18 +19,17 @@ class CategoryDbController {
 
   CategoryDbController._internal();
 
+  RxList<Category>? categories = <Category>[].obs;
   final _firestoreDbService = FirestoreDbService();
   final _snackBars = SnackBars();
   final getCategoriesErrorMessage = 'Kategoriler getirilirken bir hata oluştu.';
 
-  Future<List<Category>> getCategories() async {
-    List<Category> categories = [];
-
+  Future<void> getCategories() async {
     try {
       final snapshot = await _firestoreDbService.getData(
         docName: DocName.categories.stringDefinition,
       );
-      categories = snapshot
+      categories!.value = snapshot
           .map(
             (e) => Category.fromMap(map: e.map, id: e.id),
           )
@@ -52,7 +51,5 @@ class CategoryDbController {
         data: log.toMap(),
       );
     }
-
-    return categories;
   }
 }

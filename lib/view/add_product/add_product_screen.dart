@@ -77,52 +77,51 @@ class AddProductScreen extends StatelessWidget {
   List<Widget> get buildFromChildren {
     return [
       MyFormRow(
-        controller: _addProductController.barcodeController,
+        controller: barcodeController,
         text: barcodeText,
         hintText: barcodeHintText,
       ),
       const SizedBox(height: paddingBoxHeight),
       MyFormRow(
-        controller: _addProductController.categoryController,
+        controller: categoryController,
         text: categoryText,
         hintText: categoryHintText,
         dropdownHintText: dropdownCategoryHintText,
         isEnableDropDownButton: true,
         dropdownList:
-            _addProductController.categoryList!.map((e) => e.name).toList(),
+            _addProductController.categories!.map((e) => e.name).toList(),
       ),
       const SizedBox(height: paddingBoxHeight),
       MyFormRow(
-        controller: _addProductController.brandController,
+        controller: brandController,
         text: brandText,
         hintText: brandHintText,
         dropdownHintText: dropdownBrandHintText,
         isEnableDropDownButton: true,
-        dropdownList:
-            _addProductController.brandList!.map((e) => e.name).toList(),
+        dropdownList: _addProductController.brands!.map((e) => e.name).toList(),
       ),
       const SizedBox(height: paddingBoxHeight),
       MyFormRow(
-        controller: _addProductController.modelController,
+        controller: modelController,
         text: modelText,
         hintText: modelHintText,
       ),
       const SizedBox(height: paddingBoxHeight),
       MyFormRow(
-        controller: _addProductController.priceController,
+        controller: priceController,
         text: priceText,
         hintText: priceHintText,
         isDouble: true,
       ),
       const SizedBox(height: paddingBoxHeight),
       MyFormRow(
-        controller: _addProductController.currencyController,
+        controller: currencyController,
         text: currencyText,
         hintText: currencyHintText,
         dropdownHintText: dropdownCurrencyHintText,
         isEnableDropDownButton: true,
         dropdownList:
-            _addProductController.currencyList!.map((e) => e.name).toList(),
+            _addProductController.currencies!.map((e) => e.name).toList(),
       ),
       const SizedBox(height: paddingBoxHeight),
       buildAddProductButtonBox(),

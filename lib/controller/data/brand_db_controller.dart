@@ -18,18 +18,17 @@ class BrandDbController {
 
   BrandDbController._internal();
 
+  RxList<Brand>? brands = <Brand>[].obs;
   final _firestoreDbService = FirestoreDbService();
   final _snackBars = SnackBars();
   final getBrandsErrorMessage = 'Markalar getirilirken bir hata oluştu.';
 
-  Future<List<Brand>> getBrands() async {
-    List<Brand> brands = [];
-
+  Future<void> getBrands() async {
     try {
       final snapshot = await _firestoreDbService.getData(
         docName: DocName.brands.stringDefinition,
       );
-      brands = snapshot
+      brands!.value = snapshot
           .map(
             (e) => Brand.fromMap(map: e.map, id: e.id),
           )
@@ -51,7 +50,5 @@ class BrandDbController {
         data: log.toMap(),
       );
     }
-
-    return brands;
   }
 }
