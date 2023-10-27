@@ -24,6 +24,6 @@ class InventoryController extends GetxController {
   }
 
   Future<void> getProducts() async {
-    products!.value = await _productController.getProduct();
+    products!.value = await _productController.getProducts();
   }
 }

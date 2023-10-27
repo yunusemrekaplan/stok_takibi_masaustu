@@ -15,7 +15,7 @@ const String columnPrice = 'Fiyat';
 const String columnCurrency = 'Para Birimi';
 const String columnQuantity = 'Adet';
 const String addCategoryButtonText = 'Kategori Ekle';
-const String inventoryScreenAppBarTitle = 'Envanter';
+const String appBarTitle = 'Envanter';
 const String addProductScreenAppBarTitle = 'Ürün Ekle';
 const String addProductButton = 'Ürün Ekle';
 

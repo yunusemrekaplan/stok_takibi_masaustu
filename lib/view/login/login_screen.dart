@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
 
   Scaffold buildScaffold(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar('Giriş Ekranı'),
+      appBar: myAppBar(appBarTitle),
       body: Center(
         child: Container(
           decoration: BoxDecoration(

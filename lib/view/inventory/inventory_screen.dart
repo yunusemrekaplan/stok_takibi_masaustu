@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:stok_takibi_masaustu/model/enum/extension/extension_my_route.dart';
 
 import '/model/enum/my_route.dart';
 import '/view/inventory/inventory_controller.dart';
@@ -26,7 +27,7 @@ class InventoryScreen extends StatelessWidget {
 
   Scaffold buildScaffold(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(inventoryScreenAppBarTitle),
+      appBar: myAppBar(appBarTitle),
       body: FutureBuilder(
         future: _inventoryController.getProducts(),
         builder: builder,
@@ -192,9 +193,12 @@ class InventoryScreen extends StatelessWidget {
     return Padding(
       padding: addProductButtonPadding,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed(MyRoute.addProductScreen.stringDefinition);
+        },
         style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(borderRadius: borderRadius)),
+          shape: RoundedRectangleBorder(borderRadius: borderRadius),
+        ),
         child: const Text(addProductButton),
       ),
     );

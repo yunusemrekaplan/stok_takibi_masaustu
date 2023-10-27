@@ -15,9 +15,8 @@ import 'my_form_row.dart';
 class AddProductScreen extends StatelessWidget {
   AddProductScreen({super.key});
 
-  final ThemeController _themeController = Get.find<ThemeController>();
-  final AddProductController _addProductController =
-      Get.put(AddProductController());
+  final _themeController = Get.find<ThemeController>();
+  final _addProductController = Get.put(AddProductController());
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +30,19 @@ class AddProductScreen extends StatelessWidget {
   Scaffold buildScaffold(BuildContext context) {
     return Scaffold(
       appBar: myAppBar(addProductAppBarTitle),
-      body: buildBody(context),
+      body: FutureBuilder(
+        future: _addProductController.getLists(),
+        builder: builder,
+      ),
     );
+  }
+
+  Widget builder(BuildContext context, AsyncSnapshot<void> snapshot) {
+    if (snapshot.connectionState == ConnectionState.done) {
+      return buildBody(context);
+    } else {
+      return const Center(child: CircularProgressIndicator());
+    }
   }
 
   Center buildBody(BuildContext context) {
@@ -55,8 +65,8 @@ class AddProductScreen extends StatelessWidget {
 
   Form buildForm() {
     return Form(
-      key: _addProductController.formKey,
-      autovalidateMode: isAutoValidateMode(),
+      key: _addProductController.formKey.value,
+      autovalidateMode: _addProductController.isAutoValidateMode(),
       child: Column(
         mainAxisAlignment: formMainAxisAlignment,
         children: buildFromChildren,
@@ -78,7 +88,8 @@ class AddProductScreen extends StatelessWidget {
         hintText: categoryHintText,
         dropdownHintText: dropdownCategoryHintText,
         isEnableDropDownButton: true,
-        dropdownList: _addProductController.categoryList,
+        dropdownList:
+            _addProductController.categoryList!.map((e) => e.name).toList(),
       ),
       const SizedBox(height: paddingBoxHeight),
       MyFormRow(
@@ -87,7 +98,8 @@ class AddProductScreen extends StatelessWidget {
         hintText: brandHintText,
         dropdownHintText: dropdownBrandHintText,
         isEnableDropDownButton: true,
-        dropdownList: _addProductController.brandList,
+        dropdownList:
+            _addProductController.brandList!.map((e) => e.name).toList(),
       ),
       const SizedBox(height: paddingBoxHeight),
       MyFormRow(
@@ -109,7 +121,8 @@ class AddProductScreen extends StatelessWidget {
         hintText: currencyHintText,
         dropdownHintText: dropdownCurrencyHintText,
         isEnableDropDownButton: true,
-        dropdownList: _addProductController.currencyList,
+        dropdownList:
+            _addProductController.currencyList!.map((e) => e.name).toList(),
       ),
       const SizedBox(height: paddingBoxHeight),
       buildAddProductButtonBox(),
@@ -128,27 +141,11 @@ class AddProductScreen extends StatelessWidget {
 
   ElevatedButton buildAddProductButton() {
     return ElevatedButton(
-      onPressed: onPressedAddProductButton,
+      onPressed: _addProductController.onPressedAddProductButton,
       child: const Text(
         addProductButtonText,
         style: TextStyle(fontSize: addProductButtonTextSize),
       ),
     );
   }
-
-  void onPressedAddProductButton() {
-    changeValidateFailedState();
-
-    if (!_addProductController.isValidateFailed) {
-      _addProductController.onAddProduct();
-    }
-  }
-
-  void changeValidateFailedState() {
-    _addProductController.changeValidateFailedState(
-        !_addProductController.formKey.currentState!.validate());
-  }
-
-  AutovalidateMode isAutoValidateMode() =>
-      _addProductController.isValidateFailed ? always : disabled;
 }

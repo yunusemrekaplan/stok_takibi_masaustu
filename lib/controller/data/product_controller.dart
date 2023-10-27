@@ -18,9 +18,9 @@ class ProductController {
 
   final _firestoreDbService = FirestoreDbService();
   final _snackBars = SnackBars();
-  final getProductErrorMessage = 'Ürünler getirilirken bir hata oluştu.';
+  final getProductsErrorMessage = 'Ürünler getirilirken bir hata oluştu.';
 
-  Future<List<Product>> getProduct() async {
+  Future<List<Product>> getProducts() async {
     List<Product> products = [];
 
     try {
@@ -41,7 +41,7 @@ class ProductController {
 
       _snackBars.buildErrorSnackBar(
         Get.context,
-        getProductErrorMessage,
+        getProductsErrorMessage,
       );
     }
 

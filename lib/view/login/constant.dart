@@ -15,6 +15,7 @@ const TextStyle loginTextFormFieldStyle = TextStyle(
 
 const TextStyle hintStyle = TextStyle(color: textColor, fontSize: hintTextSize);
 
+const String appBarTitle = 'Giriş Ekranı';
 const String emailHintText = 'E-posta adresinizi giriniz';
 const String passwordHintText = 'Şifrenizi giriniz';
 const String loginButtonText = 'Giriş Yap';

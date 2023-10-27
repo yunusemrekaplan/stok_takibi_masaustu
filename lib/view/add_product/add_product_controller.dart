@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '/controller/data/currency_db_controller.dart';
+import '/controller/data/brand_db_controller.dart';
+import '/controller/data/category_db_controller.dart';
+import '/model/data/brand.dart';
+import '/model/data/category.dart';
+import '/model/data/currency.dart';
 import '/model/enum/my_route.dart';
+import 'constant/constant_enum.dart';
 
 class AddProductController extends GetxController {
-  final GlobalKey<FormState> formKey = GlobalKey();
+  final Rx<GlobalKey<FormState>> formKey = GlobalKey<FormState>().obs;
   final TextEditingController barcodeController = TextEditingController();
   final TextEditingController categoryController = TextEditingController();
   final TextEditingController brandController = TextEditingController();
@@ -12,24 +19,40 @@ class AddProductController extends GetxController {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController currencyController = TextEditingController();
 
-  /// ToDo category, brand, currency modeli oluşturulacak. Bu listeleri firebase'den çekilecek.
-  List<String> categoryList = [];
-  List<String> brandList = [];
-  List<String> currencyList = [];
+  final _categoryDbController = CategoryDbController();
+  final _brandDbController = BrandDbController();
+  final _currencyDbController = CurrencyDbController();
 
-  bool isValidateFailed = false;
+  RxList<Category>? categoryList = <Category>[].obs;
+  RxList<Brand>? brandList = <Brand>[].obs;
+  RxList<Currency>? currencyList = <Currency>[].obs;
 
-  void changeValidateFailedState(bool state) {
-    isValidateFailed = state;
-    update([MyRoute.addProductScreen]); // setState
-  }
+  Rx<bool> isValidateFailed = false.obs;
+
+  AutovalidateMode isAutoValidateMode() =>
+      isValidateFailed.value ? always : disabled;
 
   void onChangedDropDownButton(String value, TextEditingController controller) {
     controller.text = value.toString();
     update([MyRoute.addProductScreen]); // setState
   }
 
+  void onPressedAddProductButton() {
+    isValidateFailed.value = !formKey.value.currentState!.validate();
+
+    if (!isValidateFailed.value) {
+      onAddProduct();
+    }
+  }
+
+  Future<void> getLists() async {
+    categoryList!.value = await _categoryDbController.getCategories();
+    brandList!.value = await _brandDbController.getBrands();
+    currencyList!.value = await _currencyDbController.getCurrencies();
+  }
+
   void onAddProduct() {
+    print('onAddProduct');
     /*
     Product product = Product(
       barcode: barcodeController.text,

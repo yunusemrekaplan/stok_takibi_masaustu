@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '/model/data/log.dart';
-import '/model/enum/extension/extension_doc_name.dart';
 import '/model/enum/extension/extension_log_state.dart';
 import '/model/enum/extension/extension_my_route.dart';
 import '/controller/service/auth_service.dart';
 import '/controller/service/firestore_service.dart';
-import '/model/enum/doc_name.dart';
+import '/controller/data/log_db_controller.dart';
 import '/model/enum/log_state.dart';
 import '/model/enum/my_route.dart';
 import '../widget/show_dialogs.dart';
@@ -17,6 +16,7 @@ import 'constant.dart';
 
 class LoginController extends GetxController {
   final AuthService _authService = AuthService();
+  final _logController = LogDbController();
   final ShowDialogs _showDialogs = ShowDialogs();
   final SnackBars _snackBars = SnackBars();
   final GlobalKey<FormState> formKey = GlobalKey();
@@ -73,10 +73,7 @@ class LoginController extends GetxController {
       message: LogState.successfulSignIn.messageDefinition,
     );
 
-    FirestoreDbService().addData(
-      docName: DocName.logs.stringDefinition,
-      data: log.toMap(),
-    );
+    _logController.addLog(log.toMap());
 
     /*
     FirestoreDbService().addData(
