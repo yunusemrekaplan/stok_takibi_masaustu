@@ -21,18 +21,9 @@ class InventoryController extends GetxController {
         }
       },
     );
-    _productController.getProduct();
+  }
 
-    /*
-    _firestoreDbService.getData(docName: 'products').then(
-      (value) {
-        products!.value = value.documents
-            .map(
-              (e) => Product.fromMap(e.data),
-            )
-            .toList();
-      },
-    );
-    */
+  Future<void> getProducts() async {
+    products!.value = await _productController.getProduct();
   }
 }

@@ -1,3 +1,7 @@
+import 'package:get/get.dart';
+
+import '/view/widget/snack_bars.dart';
+import '/model/data/log.dart';
 import '/model/enum/extension/extension_doc_name.dart';
 import '/model/enum/doc_name.dart';
 import '/model/data/product.dart';
@@ -12,16 +16,35 @@ class ProductController {
 
   ProductController._internal();
 
-  final FirestoreDbService _firestoreDbService = FirestoreDbService();
+  final _firestoreDbService = FirestoreDbService();
+  final _snackBars = SnackBars();
+  final getProductErrorMessage = 'Ürünler getirilirken bir hata oluştu.';
 
   Future<List<Product>> getProduct() async {
-    final snapshot = await _firestoreDbService.getData(
-      docName: DocName.products.stringDefinition,
-    );
-    return snapshot
-        .map(
-          (e) => Product.fromMap(map: e.map, id: e.id),
-        )
-        .toList();
+    List<Product> products = [];
+
+    try {
+      final snapshot = await _firestoreDbService.getData(
+        docName: DocName.products.stringDefinition,
+      );
+      products = snapshot
+          .map(
+            (e) => Product.fromMap(map: e.map, id: e.id),
+          )
+          .toList();
+    } on Exception catch (e) {
+      Log(
+        dateTime: DateTime.now(),
+        state: 'Get Products',
+        message: e.toString(),
+      );
+
+      _snackBars.buildErrorSnackBar(
+        Get.context,
+        getProductErrorMessage,
+      );
+    }
+
+    return products;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ShowDialogs {
   static final ShowDialogs _instance = ShowDialogs._internal();
@@ -15,5 +16,9 @@ class ShowDialogs {
         return const Center(child: CircularProgressIndicator());
       },
     );
+  }
+
+  void closeDialog() {
+    Get.back();
   }
 }

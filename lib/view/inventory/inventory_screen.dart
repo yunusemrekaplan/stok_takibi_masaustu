@@ -27,9 +27,20 @@ class InventoryScreen extends StatelessWidget {
   Scaffold buildScaffold(BuildContext context) {
     return Scaffold(
       appBar: myAppBar(inventoryScreenAppBarTitle),
-      body: buildBody(context),
+      body: FutureBuilder(
+        future: _inventoryController.getProducts(),
+        builder: builder,
+      ),
       drawer: const MyDrawer(),
     );
+  }
+
+  Widget builder(BuildContext context, AsyncSnapshot<void> snapshot) {
+    if (snapshot.connectionState == ConnectionState.done) {
+      return buildBody(context);
+    } else {
+      return const Center(child: CircularProgressIndicator());
+    }
   }
 
   Column buildBody(BuildContext context) {
