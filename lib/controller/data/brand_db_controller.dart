@@ -1,12 +1,13 @@
 import 'package:get/get.dart';
 
+import '/model/enum/extension/extension_log_state.dart';
+import '/model/enum/log_state.dart';
 import '/model/data/log.dart';
 import '/model/enum/extension/extension_doc_name.dart';
 import '/model/enum/doc_name.dart';
 import '/model/data/brand.dart';
 import '/view/widget/snack_bars.dart';
 import '../service/firestore_service.dart';
-import 'log_db_controller.dart';
 
 class BrandDbController {
   static final BrandDbController _instance = BrandDbController._internal();
@@ -18,10 +19,8 @@ class BrandDbController {
   BrandDbController._internal();
 
   final _firestoreDbService = FirestoreDbService();
-  final _logController = LogDbController();
   final _snackBars = SnackBars();
   final getBrandsErrorMessage = 'Markalar getirilirken bir hata oluştu.';
-  final logState = 'Get Brands';
 
   Future<List<Brand>> getBrands() async {
     List<Brand> brands = [];
@@ -36,16 +35,20 @@ class BrandDbController {
           )
           .toList();
     } on Exception catch (e) {
-      Log log = Log(
-        dateTime: DateTime.now(),
-        state: logState,
-        message: e.toString(),
-      );
-      _logController.addLog(log.toMap());
-
       _snackBars.buildErrorSnackBar(
         Get.context,
         getBrandsErrorMessage,
+      );
+
+      Log log = Log(
+        dateTime: DateTime.now(),
+        state: LogState.getBrands.stringDefinition,
+        message: e.toString(),
+      );
+
+      _firestoreDbService.addData(
+        docName: DocName.logs.stringDefinition,
+        data: log.toMap(),
       );
     }
 

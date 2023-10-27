@@ -1,5 +1,9 @@
 import 'package:firedart/firedart.dart';
+import 'package:stok_takibi_masaustu/model/enum/extension/extension_doc_name.dart';
 
+import '../../model/enum/doc_name.dart';
+import '/model/enum/extension/extension_log_state.dart';
+import '/model/enum/log_state.dart';
 import '/model/data/log.dart';
 
 class FirestoreDbService {
@@ -16,18 +20,25 @@ class FirestoreDbService {
 
   FirestoreDbService._internal();
 
-  // document = table
-  Future<void> addData(
-      {required String docName, required Map<String, dynamic> data}) async {
+  //final LogDbController _logDbController = LogDbController();
+
+  Future<Document?> addData({
+    required String docName,
+    required Map<String, dynamic> data,
+  }) async {
     try {
-      await _db.collection(docName).add(data);
-    } catch (e) {
-      Log(
+      return await _db.collection(docName).add(data);
+    } on Exception catch (e) {
+      Log log = Log(
         dateTime: DateTime.now(),
-        state: 'FirestoreDbService.addData()',
+        state: LogState.addData.stringDefinition,
         message: e.toString(),
       );
+
+      addData(docName: DocName.logs.stringDefinition, data: log.toMap());
     }
+
+    return null;
   }
 
   Future<Page<Document>> getData({required String docName}) async {

@@ -6,8 +6,8 @@ import '/model/data/product.dart';
 import '/view/inventory/constant.dart';
 
 class InventoryController extends GetxController {
-  final ProductController _productController = ProductController();
-  RxList<Product>? products = <Product>[].obs;
+  final ProductDbController _productController = ProductDbController();
+  //RxList<Product>? products = <Product>[].obs;
   Rx<Color> searchIconColor = iconColor.withOpacity(1).obs;
   FocusNode searchFocusNode = FocusNode();
 
@@ -23,7 +23,9 @@ class InventoryController extends GetxController {
     );
   }
 
+  RxList<Product>? get products => _productController.products;
+
   Future<void> getProducts() async {
-    products!.value = await _productController.getProducts();
+    await _productController.getProducts();
   }
 }

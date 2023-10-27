@@ -12,7 +12,7 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   final _loginController = Get.put(LoginController());
-  final Validator _validator = Validator();
+  final _validator = Validator();
 
   @override
   Widget build(BuildContext context) {

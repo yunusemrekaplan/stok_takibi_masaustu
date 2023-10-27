@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '/controller/data/product_controller.dart';
 import '/controller/data/currency_db_controller.dart';
 import '/controller/data/brand_db_controller.dart';
 import '/controller/data/category_db_controller.dart';
 import '/model/data/brand.dart';
 import '/model/data/category.dart';
 import '/model/data/currency.dart';
+import '/model/data/product.dart';
 import '/model/enum/my_route.dart';
 import 'constant/constant_enum.dart';
 
@@ -19,6 +21,7 @@ class AddProductController extends GetxController {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController currencyController = TextEditingController();
 
+  final _productDbController = ProductDbController();
   final _categoryDbController = CategoryDbController();
   final _brandDbController = BrandDbController();
   final _currencyDbController = CurrencyDbController();
@@ -37,11 +40,11 @@ class AddProductController extends GetxController {
     update([MyRoute.addProductScreen]); // setState
   }
 
-  void onPressedAddProductButton() {
+  Future<void> onPressedAddProductButton() async {
     isValidateFailed.value = !formKey.value.currentState!.validate();
 
     if (!isValidateFailed.value) {
-      onAddProduct();
+      await onAddProduct();
     }
   }
 
@@ -51,18 +54,20 @@ class AddProductController extends GetxController {
     currencyList!.value = await _currencyDbController.getCurrencies();
   }
 
-  void onAddProduct() {
-    print('onAddProduct');
-    /*
+  Future<void> onAddProduct() async {
     Product product = Product(
       barcode: barcodeController.text,
+      category: categoryController.text,
       brand: brandController.text,
       model: modelController.text,
       price: double.parse(priceController.text),
       currency: currencyController.text,
       quantity: 0,
     );
-    */
+
+    await _productDbController.addProduct(product);
+
+    update([MyRoute.addProductScreen]);
 
     /// ToDo firebase istek gönderen metodu try cathc içine al. Hata vermezse producyList'e ekle.
   }

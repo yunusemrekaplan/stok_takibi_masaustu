@@ -1,5 +1,5 @@
 class Product {
-  final String? id;
+  late String? id;
   final String? barcode;
   final String category;
   final String brand;
