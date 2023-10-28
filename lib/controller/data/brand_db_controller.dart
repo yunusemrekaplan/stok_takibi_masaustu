@@ -21,8 +21,8 @@ class BrandDbController {
   final addBrandErrorMessage = 'Marka eklenirken bir hata oluştu.';
 
   Future<bool> getBrands() async {
-    Page<Document>? page = await _firestoreDbService.getData(
-      docName: DocName.brands.stringDefinition,
+    Page<Document>? page = await _firestoreDbService.getPage(
+      collectName: DocName.brands.stringDefinition,
     );
 
     if (page == null) return false;
@@ -37,8 +37,10 @@ class BrandDbController {
   }
 
   Future<bool> addBrand(Brand brand) async {
-    if (isContainBrand(brand.name)) {
-      return true;
+    Brand? isContain = isContainBrand(brand.name);
+    if (isContain != null) {
+      isContain.productCount += brand.productCount;
+      return await updateBrand(isContain);
     }
 
     Document? docuemnt = await _firestoreDbService.addData(
@@ -54,16 +56,36 @@ class BrandDbController {
     return true;
   }
 
-  bool isContainBrand(String brandName) {
-    bool isContain = false;
+  Future<Brand?> getBrand(String id) async {
+    Document? document = await _firestoreDbService.getData(
+      collectName: DocName.brands.stringDefinition,
+      id: id,
+    );
 
+    if (document == null) return null;
+
+    Brand brand = Brand.fromMap(map: document.map, id: document.id);
+
+    return brand;
+  }
+
+  Future<bool> updateBrand(Brand brand) async {
+    bool state = await _firestoreDbService.updateData(
+      collectName: DocName.brands.stringDefinition,
+      id: brand.id!,
+      data: brand.toMap(),
+    );
+
+    return state;
+  }
+
+  Brand? isContainBrand(String brandName) {
     for (Brand brand in brands!) {
-      if (brand.name == brandName) {
-        isContain = true;
-        break;
+      if (brand.name.toLowerCase() == brandName.toLowerCase()) {
+        return brand;
       }
     }
 
-    return isContain;
+    return null;
   }
 }

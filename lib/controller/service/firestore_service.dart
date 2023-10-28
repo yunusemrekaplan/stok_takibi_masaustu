@@ -20,9 +20,9 @@ class FirestoreDbService {
 
   FirestoreDbService._internal();
 
-  Future<Page<Document>?> getData({required String docName}) async {
+  Future<Page<Document>?> getPage({required String collectName}) async {
     Page<Document>? page;
-    final CollectionReference ref = _db.collection(docName);
+    final CollectionReference ref = _db.collection(collectName);
     try {
       page = await ref.get();
     } on Exception catch (e) {
@@ -57,30 +57,45 @@ class FirestoreDbService {
     return document;
   }
 
-  // Future<void> setData({String path, Map<String, dynamic> data}) async {
-  //   final DocumentReference ref = _db.doc(path);
-  //   await ref.set(data);
-  // }
-  //
-  // Future<void> updateData({String path, Map<String, dynamic> data}) async {
-  //   final DocumentReference ref = _db.doc(path);
-  //   await ref.update(data);
-  // }
-  //
-  // Future<void> deleteData({String path}) async {
-  //   final DocumentReference ref = _db.doc(path);
-  //   await ref.delete();
-  // }
-  //
-  //
-  // Future<QuerySnapshot> getListData({String path}) async {
-  //   final DocumentReference ref = _db.doc(path);
-  //   return await ref.collection(path).get();
-  // }
-  //
-  // Stream<QuerySnapshot> streamData({String path}) {
-  //   final DocumentReference ref = _db.doc(path);
-  //   return ref.collection(path).snapshots();
-  // }
-  //
+  Future<Document?> getData({
+    required String collectName,
+    required String id,
+  }) async {
+    Document? document;
+    try {
+      document = await _db.collection(collectName).document(id).get();
+    } on Exception catch (e) {
+      Log log = Log(
+        dateTime: DateTime.now(),
+        state: LogState.getData.stringDefinition,
+        message: e.toString(),
+      );
+
+      addData(collectName: DocName.logs.stringDefinition, data: log.toMap());
+    }
+
+    return document;
+  }
+
+  Future<bool> updateData({
+    required String collectName,
+    required String id,
+    required Map<String, dynamic> data,
+  }) async {
+    bool state = true;
+    try {
+      await _db.collection(collectName).document(id).update(data);
+    } on Exception catch (e) {
+      Log log = Log(
+        dateTime: DateTime.now(),
+        state: LogState.updateData.stringDefinition,
+        message: e.toString(),
+      );
+
+      addData(collectName: DocName.logs.stringDefinition, data: log.toMap());
+
+      state = false;
+    }
+    return state;
+  }
 }

@@ -1,12 +1,12 @@
 class Product {
   late String? id;
-  final String? barcode;
-  final String category;
-  final String brand;
-  final String model;
-  final double price;
-  final String currency;
-  final int quantity;
+  late String? barcode;
+  late String category;
+  late String brand;
+  late String model;
+  late double price;
+  late String currency;
+  late int quantity;
 
   Product({
     this.id,

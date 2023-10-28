@@ -21,8 +21,8 @@ class CategoryDbController {
   final getCategoriesErrorMessage = 'Kategoriler getirilirken bir hata oluştu.';
 
   Future<bool> getCategories() async {
-    Page<Document>? page = await _firestoreDbService.getData(
-      docName: DocName.categories.stringDefinition,
+    Page<Document>? page = await _firestoreDbService.getPage(
+      collectName: DocName.categories.stringDefinition,
     );
 
     if (page == null) return false;
@@ -37,8 +37,10 @@ class CategoryDbController {
   }
 
   Future<bool> addCategory(Category category) async {
-    if (isContainCategory(category.name) != null) {
-      return true;
+    Category? isContain = isContainCategory(category.name);
+    if (isContain != null) {
+      isContain.productCount += category.productCount;
+      return await updateCategory(isContain);
     }
     Document? docuemnt = await _firestoreDbService.addData(
       collectName: DocName.categories.stringDefinition,
@@ -53,28 +55,36 @@ class CategoryDbController {
     return true;
   }
 
-  Future getCategory(String id) async {
-    Document? document = await _firestoreDbService.getDocument(
-      docName: DocName.categories.stringDefinition,
+  Future<Category?> getCategory(String id) async {
+    Document? document = await _firestoreDbService.getData(
+      collectName: DocName.categories.stringDefinition,
       id: id,
     );
 
-    if (document == null) return false;
+    if (document == null) return null;
 
     Category category = Category.fromMap(map: document.map, id: document.id);
 
     return category;
   }
 
-  Category? isContainCategory(String categoryName) {
-    Category? category;
+  Future<bool> updateCategory(Category category) async {
+    bool state = await _firestoreDbService.updateData(
+      collectName: DocName.categories.stringDefinition,
+      id: category.id!,
+      data: category.toMap(),
+    );
 
+    return state;
+  }
+
+  Category? isContainCategory(String categoryName) {
     for (Category category in categories!) {
-      if (category.name == categoryName) {
+      if (category.name.toLowerCase() == categoryName.toLowerCase()) {
         return category;
       }
     }
 
-    return category;
+    return null;
   }
 }

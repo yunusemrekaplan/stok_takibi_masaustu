@@ -22,8 +22,8 @@ class CurrencyDbController {
       'Para birimleri getirilirken bir hata oluştu.';
 
   Future<bool> getCurrencies() async {
-    Page<Document>? page = await _firestoreDbService.getData(
-      docName: DocName.currencies.stringDefinition,
+    Page<Document>? page = await _firestoreDbService.getPage(
+      collectName: DocName.currencies.stringDefinition,
     );
 
     if (page == null) return false;

@@ -1,7 +1,7 @@
 class Category {
   late String? id;
-  final String name;
-  final int productCount;
+  late String name;
+  late int productCount;
 
   Category({
     this.id,

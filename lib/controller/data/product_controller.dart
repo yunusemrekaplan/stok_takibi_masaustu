@@ -19,8 +19,8 @@ class ProductDbController {
   final _firestoreDbService = FirestoreDbService();
 
   Future<bool> getProducts() async {
-    Page<Document>? page = await _firestoreDbService.getData(
-      docName: DocName.products.stringDefinition,
+    Page<Document>? page = await _firestoreDbService.getPage(
+      collectName: DocName.products.stringDefinition,
     );
 
     if (page == null) return false;
