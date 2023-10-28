@@ -1,12 +1,10 @@
 class Category {
-  final String? id;
-  final String code;
+  late String? id;
   final String name;
   final int productCount;
 
   Category({
     this.id,
-    required this.code,
     required this.name,
     required this.productCount,
   });
@@ -17,13 +15,11 @@ class Category {
   }) =>
       Category(
         id: id,
-        code: map['code'],
         name: map['name'],
         productCount: map['productCount'],
       );
 
   Map<String, dynamic> toMap() => {
-        'code': code,
         'name': name,
         'productCount': productCount,
       };

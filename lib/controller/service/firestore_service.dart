@@ -20,14 +20,30 @@ class FirestoreDbService {
 
   FirestoreDbService._internal();
 
-  //final LogDbController _logDbController = LogDbController();
+  Future<Page<Document>?> getData({required String docName}) async {
+    Page<Document>? page;
+    final CollectionReference ref = _db.collection(docName);
+    try {
+      page = await ref.get();
+    } on Exception catch (e) {
+      Log log = Log(
+        dateTime: DateTime.now(),
+        state: LogState.getData.stringDefinition,
+        message: e.toString(),
+      );
+
+      addData(collectName: DocName.logs.stringDefinition, data: log.toMap());
+    }
+    return page;
+  }
 
   Future<Document?> addData({
-    required String docName,
+    required String collectName,
     required Map<String, dynamic> data,
   }) async {
+    Document? document;
     try {
-      return await _db.collection(docName).add(data);
+      document = await _db.collection(collectName).add(data);
     } on Exception catch (e) {
       Log log = Log(
         dateTime: DateTime.now(),
@@ -35,15 +51,10 @@ class FirestoreDbService {
         message: e.toString(),
       );
 
-      addData(docName: DocName.logs.stringDefinition, data: log.toMap());
+      addData(collectName: DocName.logs.stringDefinition, data: log.toMap());
     }
 
-    return null;
-  }
-
-  Future<Page<Document>> getData({required String docName}) async {
-    final CollectionReference ref = _db.collection(docName);
-    return await ref.get();
+    return document;
   }
 
   // Future<void> setData({String path, Map<String, dynamic> data}) async {

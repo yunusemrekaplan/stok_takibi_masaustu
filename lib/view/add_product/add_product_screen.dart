@@ -77,13 +77,7 @@ class AddProductScreen extends StatelessWidget {
   List<Widget> get buildFromChildren {
     return [
       MyFormRow(
-        controller: barcodeController,
-        text: barcodeText,
-        hintText: barcodeHintText,
-      ),
-      const SizedBox(height: paddingBoxHeight),
-      MyFormRow(
-        controller: categoryController,
+        controller: _addProductController.categoryController,
         text: categoryText,
         hintText: categoryHintText,
         dropdownHintText: dropdownCategoryHintText,
@@ -93,7 +87,7 @@ class AddProductScreen extends StatelessWidget {
       ),
       const SizedBox(height: paddingBoxHeight),
       MyFormRow(
-        controller: brandController,
+        controller: _addProductController.brandController,
         text: brandText,
         hintText: brandHintText,
         dropdownHintText: dropdownBrandHintText,
@@ -102,26 +96,32 @@ class AddProductScreen extends StatelessWidget {
       ),
       const SizedBox(height: paddingBoxHeight),
       MyFormRow(
-        controller: modelController,
+        controller: _addProductController.modelController,
         text: modelText,
         hintText: modelHintText,
       ),
       const SizedBox(height: paddingBoxHeight),
       MyFormRow(
-        controller: priceController,
+        controller: _addProductController.priceController,
         text: priceText,
         hintText: priceHintText,
-        isDouble: true,
+        isInteger: true,
       ),
       const SizedBox(height: paddingBoxHeight),
       MyFormRow(
-        controller: currencyController,
+        controller: _addProductController.currencyController,
         text: currencyText,
         hintText: currencyHintText,
         dropdownHintText: dropdownCurrencyHintText,
         isEnableDropDownButton: true,
         dropdownList:
             _addProductController.currencies!.map((e) => e.name).toList(),
+      ),
+      MyFormRow(
+        controller: _addProductController.quantityController,
+        text: quantityText,
+        hintText: quantityHintText,
+        isInteger: true,
       ),
       const SizedBox(height: paddingBoxHeight),
       buildAddProductButtonBox(),

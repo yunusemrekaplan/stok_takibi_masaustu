@@ -47,7 +47,7 @@ class LoginController extends GetxController {
   }
 
   void onLogin(BuildContext context) async {
-    _showDialogs.loadingDialog(context);
+    _showDialogs.loadingDialog();
 
     User? user = await _authService.signIn(
       email: emailController.text,
@@ -75,7 +75,7 @@ class LoginController extends GetxController {
     );
 
     _firestoreDbService.addData(
-      docName: DocName.logs.stringDefinition,
+      collectName: DocName.logs.stringDefinition,
       data: log.toMap(),
     );
 

@@ -1,12 +1,9 @@
+import 'package:firedart/firedart.dart';
 import 'package:get/get.dart';
 
-import '/model/enum/extension/extension_log_state.dart';
-import '/model/enum/log_state.dart';
 import '/model/enum/extension/extension_doc_name.dart';
 import '/model/data/currency.dart';
-import '/model/data/log.dart';
 import '/model/enum/doc_name.dart';
-import '/view/widget/snack_bars.dart';
 import '../service/firestore_service.dart';
 
 class CurrencyDbController {
@@ -21,36 +18,53 @@ class CurrencyDbController {
 
   RxList<Currency>? currencies = <Currency>[].obs;
   final _firestoreDbService = FirestoreDbService();
-  final _snackBars = SnackBars();
   final getCurrenciesErrorMessage =
       'Para birimleri getirilirken bir hata oluştu.';
 
-  Future<void> getCurrencies() async {
-    try {
-      final snapshot = await _firestoreDbService.getData(
-        docName: DocName.categories.stringDefinition,
-      );
-      currencies!.value = snapshot
-          .map(
-            (e) => Currency.fromMap(map: e.map, id: e.id),
-          )
-          .toList();
-    } on Exception catch (e) {
-      _snackBars.buildErrorSnackBar(
-        Get.context,
-        getCurrenciesErrorMessage,
-      );
+  Future<bool> getCurrencies() async {
+    Page<Document>? page = await _firestoreDbService.getData(
+      docName: DocName.currencies.stringDefinition,
+    );
 
-      Log log = Log(
-        dateTime: DateTime.now(),
-        state: LogState.getCurrencies.stringDefinition,
-        message: e.toString(),
-      );
+    if (page == null) return false;
 
-      _firestoreDbService.addData(
-        docName: DocName.logs.stringDefinition,
-        data: log.toMap(),
-      );
+    currencies!.value = page
+        .map(
+          (e) => Currency.fromMap(map: e.map, id: e.id),
+        )
+        .toList();
+
+    return true;
+  }
+
+  Future<bool> addCurrency(Currency currency) async {
+    if (isContainCurrency(currency.name)) {
+      return true;
     }
+
+    Document? docuemnt = await _firestoreDbService.addData(
+      collectName: DocName.currencies.stringDefinition,
+      data: currency.toMap(),
+    );
+
+    if (docuemnt == null) return false;
+
+    currency.id = docuemnt.id;
+    currencies!.add(currency);
+
+    return true;
+  }
+
+  bool isContainCurrency(String currencyName) {
+    bool isContain = false;
+
+    for (Currency currency in currencies!) {
+      if (currency.name == currencyName) {
+        isContain = true;
+        break;
+      }
+    }
+
+    return isContain;
   }
 }

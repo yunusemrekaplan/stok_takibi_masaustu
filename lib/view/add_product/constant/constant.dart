@@ -17,10 +17,3 @@ InputBorder textFormFieldEnabledBorder =
     UnderlineInputBorder(borderSide: borderSide);
 
 Icon dropDownIcon = const Icon(Icons.arrow_downward, color: iconColor);
-
-final TextEditingController barcodeController = TextEditingController();
-final TextEditingController categoryController = TextEditingController();
-final TextEditingController brandController = TextEditingController();
-final TextEditingController modelController = TextEditingController();
-final TextEditingController priceController = TextEditingController();
-final TextEditingController currencyController = TextEditingController();

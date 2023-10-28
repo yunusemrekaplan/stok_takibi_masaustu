@@ -18,6 +18,7 @@ const String addCategoryButtonText = 'Kategori Ekle';
 const String appBarTitle = 'Envanter';
 const String addProductScreenAppBarTitle = 'Ürün Ekle';
 const String addProductButton = 'Ürün Ekle';
+const String getProductsErrorMessage = 'Ürünler getirilemedi';
 
 const EdgeInsets dataTablePadding = EdgeInsets.all(dataTableAllPadding);
 const EdgeInsets searchBoxContentPadding = EdgeInsets.fromLTRB(

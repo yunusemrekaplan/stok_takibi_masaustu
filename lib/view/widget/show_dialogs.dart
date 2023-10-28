@@ -8,9 +8,9 @@ class ShowDialogs {
 
   ShowDialogs._internal();
 
-  Future loadingDialog(BuildContext context) {
+  Future loadingDialog() {
     return showDialog(
-      context: context,
+      context: Get.context!,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return const Center(child: CircularProgressIndicator());

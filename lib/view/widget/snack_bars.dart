@@ -51,4 +51,25 @@ class SnackBars {
       ),
     );
   }
+
+  void buildSuccessSnackBar(
+    BuildContext? context,
+    String message,
+  ) {
+    ScaffoldMessenger.of(context!).showSnackBar(
+      SnackBar(
+        duration: const Duration(milliseconds: snackBarDuration),
+        backgroundColor: snackBarSuccessColor,
+        content: Text(
+          message,
+          style: const TextStyle(
+            fontSize: snackBarTextFontSize,
+            color: textColor,
+          ),
+        ),
+        showCloseIcon: true,
+        closeIconColor: closeIconColor,
+      ),
+    );
+  }
 }

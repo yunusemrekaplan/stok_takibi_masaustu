@@ -21,7 +21,7 @@ class MyFormRow extends StatelessWidget {
     required this.hintText,
     this.isEnableDropDownButton = false,
     this.dropdownHintText,
-    this.isDouble = false,
+    this.isInteger = false,
     this.dropdownList = const [],
   });
 
@@ -32,7 +32,7 @@ class MyFormRow extends StatelessWidget {
     FilteringTextInputFormatter.digitsOnly,
   ];
   final bool isEnableDropDownButton;
-  final bool isDouble;
+  final bool isInteger;
 
   late TextEditingController controller;
   late String text;
@@ -75,7 +75,7 @@ class MyFormRow extends StatelessWidget {
         validator: _validator.validateEmpty,
         style: textFormFieldTextStyle,
         decoration: buildInputDecoration(hintText),
-        inputFormatters: isDouble == true ? inputFormatters : null,
+        inputFormatters: isInteger == true ? inputFormatters : null,
       ),
     );
   }
