@@ -128,7 +128,7 @@ class MyFormRow extends StatelessWidget {
       border: textFormFieldBorder,
       enabledBorder: textFormFieldEnabledBorder,
       hintText: hintText,
-      hintStyle: textFormFieldTextStyle,
+      hintStyle: textFormFieldHintTextStyle,
       contentPadding: contentPadding,
       constraints: boxConstraints,
     );

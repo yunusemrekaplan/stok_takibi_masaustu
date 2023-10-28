@@ -7,6 +7,10 @@ const textFormFieldTextStyle = TextStyle(
   color: textColor,
   fontSize: textFormFieldTextSize,
 );
+final textFormFieldHintTextStyle = TextStyle(
+  color: hintColor,
+  fontSize: textFormFieldTextSize,
+);
 const formTextStyle = TextStyle(
   color: textColor,
   fontSize: formTextSize,
