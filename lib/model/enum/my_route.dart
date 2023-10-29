@@ -2,14 +2,16 @@ enum MyRoute {
   loginScreen,
   inventoryScreen,
   addProductScreen,
-  categoryScreen,
-  brandScreen,
+  categoriesScreen,
+  brandsScreen,
+  addCategoryScreen,
 }
 
 const routes = [
   MyRoute.loginScreen,
   MyRoute.inventoryScreen,
   MyRoute.addProductScreen,
-  MyRoute.categoryScreen,
-  MyRoute.brandScreen,
+  MyRoute.categoriesScreen,
+  MyRoute.brandsScreen,
+  MyRoute.addCategoryScreen,
 ];

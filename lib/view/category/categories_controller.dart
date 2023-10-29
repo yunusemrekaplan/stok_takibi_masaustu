@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/data/product_controller.dart';
+import '../../controller/data/category_db_controller.dart';
 import '../../model/data/category.dart';
-import '../../model/data/product.dart';
 import 'constant.dart';
 
-class CategoryController extends GetxController {
-  late Category category;
+class CategoriesController extends GetxController {
+  final _categoryDbController = CategoryDbController();
   Rx<Color> searchIconColor = iconColor.withOpacity(1).obs;
   FocusNode searchFocusNode = FocusNode();
 
-  CategoryController({required this.category}) {
+  CategoriesController() {
     searchFocusNode.addListener(
       () {
         if (searchFocusNode.hasFocus) {
@@ -23,12 +22,9 @@ class CategoryController extends GetxController {
     );
   }
 
-  final _productController = ProductDbController();
-  List<Product>? products = [];
+  RxList<Category>? get categories => _categoryDbController.categories;
 
-  Future<void> getProducts() async {
-    products = _productController.products!
-        .where((product) => product.category == category.name)
-        .toList();
+  Future<void> getCategories() async {
+    await _categoryDbController.getCategories();
   }
 }

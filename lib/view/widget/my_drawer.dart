@@ -26,6 +26,12 @@ class MyDrawer extends StatelessWidget {
               Get.offNamed(MyRoute.inventoryScreen.stringDefinition);
             },
           ),
+          ListTile(
+            title: const Text('Kategoriler'),
+            onTap: () {
+              Get.offNamed(MyRoute.categoriesScreen.stringDefinition);
+            },
+          ),
         ],
       ),
     );

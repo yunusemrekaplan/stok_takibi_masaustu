@@ -18,7 +18,7 @@ class BrandScreen extends StatelessWidget {
     return GetBuilder(
       init: _brandController,
       builder: (_) => buildScaffold(context),
-      id: MyRoute.brandScreen,
+      id: MyRoute.brandsScreen,
     );
   }
 

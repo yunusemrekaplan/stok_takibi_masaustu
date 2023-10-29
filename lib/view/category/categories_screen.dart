@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:stok_takibi_masaustu/model/enum/extension/extension_my_route.dart';
+import 'package:stok_takibi_masaustu/view/category/category_screen.dart';
 
-import '/model/enum/my_route.dart';
-import '/view/inventory/inventory_controller.dart';
-import '/view/theme/theme_controller.dart';
-import '/view/widget/my_app_bar.dart';
+import '../theme/theme_controller.dart';
 import '/view/widget/my_drawer.dart';
+import '/view/widget/my_app_bar.dart';
+import '/model/enum/my_route.dart';
+import 'categories_controller.dart';
 import 'constant.dart';
 
-class InventoryScreen extends StatelessWidget {
-  InventoryScreen({super.key});
-
+class CategoriesScreen extends StatelessWidget {
+  CategoriesScreen({super.key});
+  final _categoriesController = Get.put(CategoriesController());
   final _themeController = Get.find<ThemeController>();
-  final _inventoryController = Get.put(InventoryController());
   final TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: _inventoryController,
+      init: _categoriesController,
       builder: (_) => buildScaffold(context),
-      id: MyRoute.inventoryScreen,
+      id: MyRoute.categoriesScreen,
     );
   }
 
   Scaffold buildScaffold(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(appBarTitle),
+      appBar: myAppBar(categoriesAppBarTitle),
       body: FutureBuilder(
-        future: _inventoryController.getProducts(),
+        future: _categoriesController.getCategories(),
         builder: builder,
       ),
       drawer: const MyDrawer(),
@@ -102,47 +101,38 @@ class InventoryScreen extends StatelessWidget {
 
   List<DataColumn> buildColumns(BuildContext context) {
     return [
-      const DataColumn(label: Text(columnCategory)),
-      const DataColumn(label: Text(columnBrand)),
-      const DataColumn(label: Text(columnModel)),
+      const DataColumn(label: Text(columnNameText)),
       const DataColumn(
-        label: Text(columnPrice),
-        numeric: columnPriceNumeric,
+        label: Text(columnProductCountText),
+        numeric: columnProductCountNumeric,
       ),
-      const DataColumn(label: Text(columnCurrency)),
-      const DataColumn(
-        label: Text(columnQuantity),
-        numeric: columnQuantityNumeric,
-      ),
+      const DataColumn(label: Text(columnEditText)),
+      const DataColumn(label: Text(columnDeleteText)),
       DataColumn(label: buildSearchBox(context)),
     ];
   }
 
   List<DataRow> buildRows() {
-    return _inventoryController.products!
+    return _categoriesController.categories!
         .map(
           (element) => DataRow(
-            cells: [
-              DataCell(Text(element.category)),
-              DataCell(Text(element.brand)),
-              DataCell(Text(element.model)),
-              DataCell(Text(element.price.toString())),
-              DataCell(Text(element.currency)),
-              DataCell(Text(element.quantity.toString())),
-              const DataCell(
-                SizedBox(
-                  width: iconCellBoxSize,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.edit, color: iconColor),
-                      Icon(Icons.delete, color: iconColor),
-                      Icon(Icons.add, color: iconColor),
-                      Icon(Icons.remove, color: iconColor),
-                    ],
-                  ),
-                ),
+            onSelectChanged: (value) => Get.to(
+              () => CategoryScreen(
+                category: element,
               ),
+            ),
+            cells: [
+              DataCell(Text(element.name)),
+              DataCell(Text(element.productCount.toString())),
+              DataCell(IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.edit),
+              )),
+              DataCell(IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.delete),
+              )),
+              const DataCell(Text('')),
             ],
           ),
         )
@@ -162,7 +152,7 @@ class InventoryScreen extends StatelessWidget {
     return Container(
       color: searchBoxColor,
       child: TextFormField(
-        focusNode: _inventoryController.searchFocusNode,
+        focusNode: _categoriesController.searchFocusNode,
         controller: searchController,
         style: searchBoxTextStyle,
         decoration: InputDecoration(
@@ -170,7 +160,7 @@ class InventoryScreen extends StatelessWidget {
           constraints: BoxConstraints(
             maxHeight: 35,
             minWidth: 210,
-            maxWidth: MediaQuery.of(context).size.width * 0.174,
+            maxWidth: MediaQuery.of(context).size.width * 0.2,
           ),
         ),
         cursorColor: cursorColor,
@@ -185,7 +175,7 @@ class InventoryScreen extends StatelessWidget {
       child: Obx(
         () => Icon(
           searchIcon,
-          color: _inventoryController.searchIconColor.value,
+          color: _categoriesController.searchIconColor.value,
         ),
       ),
     );
@@ -193,15 +183,13 @@ class InventoryScreen extends StatelessWidget {
 
   Padding buildAddProductButton() {
     return Padding(
-      padding: addProductButtonPadding,
+      padding: addCategoryButtonPadding,
       child: ElevatedButton(
-        onPressed: () {
-          Get.toNamed(MyRoute.addProductScreen.stringDefinition);
-        },
+        onPressed: () {},
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(borderRadius: borderRadius),
         ),
-        child: const Text(addProductButton),
+        child: const Text(addButtonText),
       ),
     );
   }

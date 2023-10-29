@@ -9,10 +9,12 @@ extension ToString on MyRoute {
         return '/inventoryScreen';
       case MyRoute.addProductScreen:
         return '/addProductScreen';
-      case MyRoute.categoryScreen:
+      case MyRoute.categoriesScreen:
         return '/categoryScreen';
-      case MyRoute.brandScreen:
+      case MyRoute.brandsScreen:
         return '/brandScreen';
+      case MyRoute.addCategoryScreen:
+        return '/addCategoryScreen';
     }
   }
 }
