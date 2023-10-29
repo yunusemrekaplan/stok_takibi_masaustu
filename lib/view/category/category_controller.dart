@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/data/product_controller.dart';
-import '../../model/data/category.dart';
-import '../../model/data/product.dart';
+import '/controller/data/product_db_controller.dart';
+import '/model/data/category.dart';
+import '/model/data/product.dart';
 import 'constant.dart';
 
 class CategoryController extends GetxController {
@@ -23,11 +23,11 @@ class CategoryController extends GetxController {
     );
   }
 
-  final _productController = ProductDbController();
+  final _productDbController = ProductDbController();
   List<Product>? products = [];
 
   Future<void> getProducts() async {
-    products = _productController.products!
+    products = _productDbController.products!
         .where((product) => product.category == category.name)
         .toList();
   }

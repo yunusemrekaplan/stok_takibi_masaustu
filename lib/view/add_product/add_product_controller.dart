@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../widget/show_dialogs.dart';
 import '../widget/snack_bars.dart';
-import '/controller/data/product_controller.dart';
+import '/controller/data/product_db_controller.dart';
 import '/controller/data/currency_db_controller.dart';
 import '/controller/data/brand_db_controller.dart';
 import '/controller/data/category_db_controller.dart';
